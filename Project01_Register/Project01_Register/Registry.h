@@ -6,11 +6,9 @@ class Registry
 {
 public:
 
-	Registry(int startSize) : store(startSize) {}
+						Registry(int startSize) : store(startSize) {}
 
-	void put(const K& key, V* value) {
-		store.push_back(new Entry(key, value));
-	}
+	void				put(const K& key, V* value) { store.push_back(new Entry(key, value)); }
 
 	V* get(const K& key) const {
 		for (Entry** ptr = store.begin(); ptr != store.end(); ++ptr) {
@@ -30,16 +28,16 @@ public:
 	}
 
 private:
-	struct Entry {
-		const K				key;
-		V*					value;
 
-		Entry(const K& key, V* value)
-			: key(key), value(value) {}
+	PtrList<Entry>		store;
+
+	struct Entry {
+		const K			key;
+		V*				value;
+
+		Entry(const K& key, V* value) : key(key), value(value) {}
 		~Entry() { delete value; }
 	};
-
-	PtrList<Entry>				store;
 
 };
 

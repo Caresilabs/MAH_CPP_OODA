@@ -4,29 +4,22 @@ template <class T>
 class PtrList
 {
 public:
-	PtrList(int maxSize = 10) : maxSize(maxSize), size(0) {
-		data = new T*[maxSize];
-	}
+	
+						PtrList(int maxSize = 10) : maxSize(maxSize), size(0) { this->data = new T*[maxSize]; }
 
-	virtual ~PtrList() {
-		for (int i = 0; i < size; ++i) {
-			if (data[i] != nullptr)
-				delete data[i];
-		}
-		delete[] data;
-	}
+						// Dont allow copying
+						PtrList(const PtrList& rhs) = delete;
 
-	// Dont allow copying
-	PtrList(const PtrList& rhs) = delete;
-	PtrList& operator=(const PtrList& rhs) = delete;
+	PtrList&			operator=(const PtrList& rhs) = delete;
 
-	T* operator[](int i) const {
-		return data[i]; // cannot return null;
-	}
+	T*					operator[](int i) const { return data[i]; }
 
-	int getSize() const {
-		return size;
-	}
+	int					getSize() const { return size; }
+
+	T**					begin() const { return &data[0]; }
+
+	T**					end() const { return &data[size]; }
+
 
 	void push_back(T* item) {
 		if (size >= maxSize) {
@@ -52,15 +45,13 @@ public:
 		}
 	}
 
-	T** begin() const {
-		return &data[0];
+	~PtrList() {
+		for (int i = 0; i < size; ++i) {
+			if (data[i] != nullptr)
+				delete data[i];
+		}
+		delete[] data;
 	}
-
-	T** end() const {
-		return &data[size];
-	}
-
-	
 
 private:
 	T**					data;
