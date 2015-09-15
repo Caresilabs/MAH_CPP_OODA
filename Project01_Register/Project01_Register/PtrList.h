@@ -9,8 +9,9 @@ public:
 	}
 
 	virtual ~PtrList() {
-		for (auto i = data; i < data + size; ++i) {
-			delete i;
+		for (int i = 0; i < size; ++i) {
+			if (data[i] != nullptr)
+				delete data[i];
 		}
 		delete[] data;
 	}
@@ -19,28 +20,50 @@ public:
 	PtrList(const PtrList& rhs) = delete;
 	PtrList& operator=(const PtrList& rhs) = delete;
 
-	const T& operator[](int i) const {
-		return *data[i];
+	T* operator[](int i) const {
+		return data[i]; // cannot return null;
 	}
 
-	void push_back(T* item){
-		if (size >= maxSize) {
+	int getSize() const {
+		return size;
+	}
 
+	void push_back(T* item) {
+		if (size >= maxSize) {
+			maxSize = maxSize * 2 + 1;
+			auto newData = new T*[maxSize];
+			for (int i = 0; i < size; ++i) {
+				newData[i] = data[i];
+				//delete data[i];
+			}
+			delete[] data;
+			data = newData;
 		}
+
 		data[size++] = item;
 	}
 
-	void pop_back(T* item){
-		for (T* i = data; i != data + size; ++i) {
-			if (i == item) {
+	void pop_back(const T* item) {
+		for (int i = 0; i < size; ++i) {
+			if (data[i] == item) {
 				delete data[i];
 				data[i] = nullptr;
 			}
 		}
 	}
 
+	T** begin() const {
+		return &data[0];
+	}
+
+	T** end() const {
+		return &data[size];
+	}
+
+	
+
 private:
-	T** data;
-	int maxSize;
-	int size;
+	T**					data;
+	int					maxSize;
+	int					size;
 };

@@ -65,6 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="PtrList.h" />
+    <ClInclude Include="Registry.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
