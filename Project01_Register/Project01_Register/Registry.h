@@ -28,9 +28,6 @@ public:
 	}
 
 private:
-
-	PtrList<Entry>		store;
-
 	struct Entry {
 		const K			key;
 		V*				value;
@@ -38,6 +35,8 @@ private:
 		Entry(const K& key, V* value) : key(key), value(value) {}
 		~Entry() { delete value; }
 	};
+
+	PtrList<Entry>		store;
 
 };
 
