@@ -1,29 +1,32 @@
 #include <iostream>
-#include "PtrList.h";
 #include "Registry.h"
+#include "Vehicle.h"
 
 int main() {
 	// Test class
 
-	Registry<int, char> registry(3);
-	registry.put(22, new char('A'));
-	registry.put(1, new char('Y'));
-	registry.put(5, new char('X'));
-	registry.put(6, new char('G'));
-	registry.put(13, new char('g'));
-	registry.put(90, new char('2'));
-	registry.put(155, new char('u'));
+	Registry<int, Vehicle> registry( 3 );
+	registry.put( 22, new Vehicle( "Volvo", 700, 4 ) );
+	registry.put( 1, new  Vehicle( "Volvo", 700, 4 ) );
+	registry.put( 5, new Vehicle( "Volvo", 700, 4 ) );
+	registry.put( 6, new Vehicle( "Volvo", 700, 4 ) );
+	registry.put( 13, new  Vehicle( "Volvo", 700, 4 ) );
+	registry.put( 90, new Vehicle( "Volvo", 700, 4 ) );
+	registry.put( 155, new  Vehicle( "Volvo", 700, 4 ) );
 
-	auto toDelete = registry.get(6);
-	registry.remove(toDelete);
+	auto toDelete = registry.get( 6 );
+	//registry.remove( toDelete );
 
-	auto deleted = registry.get(6);
-	if (deleted) {
-		std::cout << *registry.get(6) << std::endl;
+	auto deleted = registry.get( 6 );
+	if ( deleted ) {
+		//std::cout << *registry.get( 6 ) << std::endl;
+		registry.get( 6 )->printInformation();
 	} else {
 		std::cout << "Value at key 6 was deleted" << std::endl;
 	}
 
+	
+	
 	// Wait for input
 	std::cin.get();
 }
