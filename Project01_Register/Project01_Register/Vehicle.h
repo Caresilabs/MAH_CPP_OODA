@@ -10,7 +10,7 @@ public:
 
 	virtual				~Vehicle();
 
-private:
+protected:
 	std::string		name;
 	int				weight;
 	int				numWheels;

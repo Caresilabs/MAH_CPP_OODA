@@ -59,12 +59,9 @@ private:
 		V*					value;
 
 		Entry( const K& key, V* value ) : key( key ), value( value ) { }
-
-		~Entry() { 
-			delete value; 
-		}
 		Entry( const Entry& rhs ) = delete;
 		Entry& operator=( const Entry& rhs ) = delete;
+		~Entry() { delete value; }
 	};
 
 	PtrList<Entry>			store;
