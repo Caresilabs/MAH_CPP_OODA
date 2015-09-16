@@ -1,25 +1,26 @@
 #pragma once
 
+
 template <class T>
 class PtrList {
 public:
 
-	PtrList( int maxSize = 10 )	: maxSize( maxSize ), size( 0 ) {
-		this->data = new T*[maxSize]; 
+	PtrList( int maxSize = 10 ) : maxSize( maxSize ), size( 0 ) {
+		this->data = new T*[maxSize];
 	}
 
-						// Dont allow copying
-						PtrList( const PtrList& rhs ) = delete;
+	// Don't allow copying
+	PtrList( const PtrList& rhs ) = delete;
 
 	PtrList&			operator=( const PtrList& rhs ) = delete;
 
 	T*					operator[]( int i ) const { return data[i]; }
 
-	int					getSize() const { return size; }
-
 	T**					begin() const { return &data[0]; }
 
 	T**					end() const { return &data[size]; }
+
+	int					getSize() const { return size; }
 
 
 	void push_back( T* item ) {
@@ -27,6 +28,8 @@ public:
 			// Let's expand our array
 			maxSize = maxSize * 2 + 1;
 			auto newData = new T*[maxSize];
+
+			// We dont need to kill our old data, just change our pointers. <3 Pointers <3
 			for ( int i = 0; i < size; ++i ) {
 				newData[i] = data[i];
 			}
@@ -53,6 +56,8 @@ public:
 		}
 		delete[] data;
 	}
+
+	typedef typename T** iterator_t;
 
 private:
 	T**					data;

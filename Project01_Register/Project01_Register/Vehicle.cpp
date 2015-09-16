@@ -13,4 +13,6 @@ void Vehicle::printInformation() {
 	std::cout << std::endl << "}" << std::endl;
 }
 
-
+Vehicle::~Vehicle() {
+	std::cout << "Deleted vehicle " << name << std::endl;
+}
