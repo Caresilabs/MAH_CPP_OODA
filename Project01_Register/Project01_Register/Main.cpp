@@ -43,8 +43,10 @@ void test() {
 	std::cout << "We print our replaced Yamaha with an Audi, expect Audi as an output." << std::endl;
 	registry.get( 13 )->printInformation(); // We print
 
-	std::cout << "The Registry should go out of scope! Expect 4 objects to get destroyed:" << std::endl;
 
+	//Registry<int, Vehicle> copy( registry );
+
+	std::cout << "The Registry should go out of scope! Expect 4 objects to get destroyed:" << std::endl;
 }
 
 int main() {

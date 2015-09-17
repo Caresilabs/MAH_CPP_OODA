@@ -20,7 +20,7 @@ public:
 
 		// Push new entry or change current
 		if ( !entry ) {
-			store.push_back( new Entry( key, value ) );
+			store.push( new Entry( key, value ) );
 		} else {
 			delete (entry->value);
 			entry->value = value;
@@ -53,14 +53,27 @@ public:
 		}
 	}
 
+	int getCount() {
+		return store.getCount();
+	}
+
 private:
 	struct Entry {
 		const K				key;
 		V*					value;
 
 		Entry( const K& key, V* value ) : key( key ), value( value ) { }
-		Entry( const Entry& rhs ) = delete;
-		Entry& operator=( const Entry& rhs ) = delete;
+
+		// We do allow copy constructor
+		Entry( const Entry& rhs ) : key( rhs.key ) {
+			if ( rhs.value == nullptr ) {
+				this->value = rhs.value; // Really, there is no way to copy without breaking OO design. Is there a way? Maybe using malloc?
+			} else {
+				this->value = nullptr;
+			}
+		}
+
+		Entry& operator=( const Entry& rhs ) = delete; // Don't allow assigning.
 		~Entry() { delete value; }
 	};
 
