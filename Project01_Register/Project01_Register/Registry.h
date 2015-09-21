@@ -1,6 +1,9 @@
 #pragma once
+
 #include "PtrList.h"
 
+// The Registry holds a key and a value. The Value(V) will be stored on the heap and will release when the Registry is released.
+// The key however (which should be small and simple is stored on the stack?)
 template <class K, class V>
 class Registry {
 public:
