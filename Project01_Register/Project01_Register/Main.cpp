@@ -4,11 +4,17 @@
 #include "Car.h"
 #include "MotorCycle.h"
 
+// DEBUG
+#define CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 
 // ============================
 // Let's do some basic testing!
 // ============================
 void test() {
+
 	/// Arrange
 
 	Registry<int, Vehicle> registry( 3 );
@@ -51,9 +57,12 @@ void test() {
 
 int main() {
 
-	// run our test
+	// Run our test
 	test();
 
 	// Wait for input
 	std::cin.get();
+	
+	// Lastly we display all mem leaks
+	_CrtDumpMemoryLeaks();
 }
