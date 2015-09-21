@@ -50,9 +50,9 @@ void test() {
 	registry.get( 13 )->printInformation(); // We print
 
 
-	//Registry<int, Vehicle> copy( registry );
+	Registry<int, Vehicle> copy( registry );
 
-	std::cout << "The Registry should go out of scope! Expect 4 objects to get destroyed:" << std::endl;
+	std::cout << "The Registry should go out of scope! Expect 8 (4*2 because we copied) objects to get destroyed:" << std::endl;
 }
 
 int main() {

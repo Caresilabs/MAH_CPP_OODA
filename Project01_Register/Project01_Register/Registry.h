@@ -29,16 +29,24 @@ private:
 		}
 
 		Entry( const Entry& rhs ) : key( rhs.key ) {
-			if ( rhs.value == nullptr ) {
-				this->value = rhs.value; // Really, there is no way to copy without breaking OO design. Is there a way? Maybe using malloc?
-										 // new T(rhs.value); will only copy the Base class and ignore the subclass
+			if ( rhs.value != nullptr ) {
+				//1. this->value = rhs.value; 
+
+				// 2. Really, there is no way to copy without breaking OO design. Is there a way? Maybe using malloc?
+				// new V(rhs.value); will only copy the Base class and ignore the subclass
+				
+				// 3. Last one is OO friendly but causes issues with std::string
+				this->value = static_cast<V*>(malloc(sizeof(*rhs.value)));
+				memcpy(this->value, rhs.value, sizeof(*rhs.value));
+				*value = *rhs.value;
+
 			} else {
 				this->value = nullptr;
 			}
 		}
 
 		Entry& operator=( const Entry& rhs ) = delete; // Don't allow assigning.
-		~Entry() { delete value; }
+		~Entry() { if (value != nullptr) delete value; }
 	};
 
 private:

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MotorCycle.h"
 
-MotorCycle::MotorCycle( const std::string&name, int weight ) : Vehicle( name, weight, 2 ) {
+MotorCycle::MotorCycle( char* name, int weight ) : Vehicle( name, weight, 2 ) {
 }
 
 

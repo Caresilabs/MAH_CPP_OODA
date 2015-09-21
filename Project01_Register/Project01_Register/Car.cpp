@@ -2,7 +2,7 @@
 #include "Car.h"
 
 
-Car::Car( const std::string&name, int weight ) : Vehicle( name, weight, 4 ) {
+Car::Car( char* name, int weight ) : Vehicle( name, weight, 4 ) {
 }
 
 

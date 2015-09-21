@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Vehicle.h"
 
-Vehicle::Vehicle( const std::string& name, int weight, int numWheels )
+Vehicle::Vehicle( char* name, int weight, int numWheels )
 	: name( name ), weight( weight ), numWheels( numWheels ) {
 }
 
