@@ -67,7 +67,6 @@ void Registry<K, V>::put( const K& key, V* value ) {
 	// Check if already exists
 
 	Entry* entry = nullptr;
-	//for ( int i = 0; i < store.getSize(); ++i ) {
 	for ( PtrList<Entry>::iterator_t ptr = store.begin(); ptr != store.end(); ++ptr ) {
 		if ( *ptr == nullptr ) continue;
 		if ( (*ptr)->key == key ) {
@@ -78,9 +77,9 @@ void Registry<K, V>::put( const K& key, V* value ) {
 
 	// Push new entry or change current
 	if ( !entry ) {
-		store.push( new Entry( key, value ) );
+		store.push_back( new Entry( key, value ) );
 	} else {
-		delete (entry->value);
+		delete (entry->value); // Free replaced value
 		entry->value = value;
 	}
 }
@@ -108,7 +107,7 @@ void Registry<K, V>::remove( V* value ) {
 	for ( PtrList<Entry>::iterator_t ptr = store.begin(); ptr != store.end(); ++ptr ) {
 		if ( *ptr == nullptr ) continue;
 		if ( (*ptr)->value == value ) {
-			store.pop_back( *ptr );
+			store.remove( *ptr );
 			return;
 		}
 	}
