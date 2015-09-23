@@ -4,28 +4,32 @@
 
 // The Registry holds a key and a value. The Value(V) will be stored on the heap and will release when the Registry is released.
 // The key however (which should be small and simple is stored on the stack?)
-template <class K, class V>
+template <class Key, class Value>
 class Registry {
 public:
 
-	Registry( int startSize );
+	Registry( int startSize = 20 );
 
-	void				put( const K& key, V* value );
+	Registry( const Registry<Key, Value>& rhs );
 
-	void				remove( V* value );
+	Registry& operator=( const Registry<Key, Value>& rhs );
 
-	V*					get( const K& key ) const;
+	void				put( const Key& key, Value* value );
 
-	bool				contains( const K& key ) const;
+	void				remove( Value* value );
+
+	Value*				get( const Key& key ) const;
+
+	bool				contains( const Key& key ) const;
 
 	int					getCount() const { return store.getCount(); }
 
 private:
 	struct Entry {
-		const K				key;
-		V*					value;
+		const Key				key;
+		Value*					value;
 
-		Entry( const K& key, V* value ) : key( key ), value( value ) { 
+		Entry( const Key& key, Value* value ) : key( key ), value( value ) {
 		}
 
 		Entry( const Entry& rhs ) : key( rhs.key ) {
@@ -34,11 +38,11 @@ private:
 
 				// 2. Really, there is no way to copy without breaking OO design. Is there a way? Maybe using malloc?
 				// new V(rhs.value); will only copy the Base class and ignore the subclass
-				
+
 				// 3. Last one is OO friendly but causes issues with std::string
-				this->value = static_cast<V*>(malloc(sizeof(*rhs.value)));
-				memcpy(this->value, rhs.value, sizeof(*rhs.value));
-				*value = *rhs.value;
+				this->value = static_cast<Value*>(malloc( sizeof( *rhs.value ) ));
+				memcpy( this->value, rhs.value, sizeof( *rhs.value ) );
+				//*value = *rhs.value;
 
 			} else {
 				this->value = nullptr;
@@ -46,7 +50,7 @@ private:
 		}
 
 		Entry& operator=( const Entry& rhs ) = delete; // Don't allow assigning.
-		~Entry() { if (value != nullptr) delete value; }
+		~Entry() { if ( value != nullptr ) delete value; }
 	};
 
 private:
@@ -58,12 +62,24 @@ private:
 //		  Implementation 
 // =============================
 
-template <class K, class V>
-Registry<K,V>::Registry( int startSize ) : store( startSize ) { 
+template <class Key, class Value>
+Registry<Key, Value>::Registry( int startSize = 20 ) : store( startSize ) {
 }
 
-template <class K, class V>
-void Registry<K, V>::put( const K& key, V* value ) {
+template <class Key, class Value>
+Registry<Key, Value>::Registry( const Registry<Key, Value>& rhs ) : store( rhs.store ) {
+}
+
+template <class Key, class Value>
+Registry<Key, Value>& Registry<Key, Value>::operator=( const Registry<Key, Value>& rhs ) {
+	if ( this == rhs )
+		return this;
+
+	store = rhs.store;
+}
+
+template <class Key, class Value>
+void Registry<Key, Value>::put( const Key& key, Value* value ) {
 	// Check if already exists
 
 	Entry* entry = nullptr;
@@ -84,8 +100,8 @@ void Registry<K, V>::put( const K& key, V* value ) {
 	}
 }
 
-template <class K, class V>
-bool Registry<K, V>::contains( const K& key ) const {
+template <class Key, class Value>
+bool Registry<Key, Value>::contains( const Key& key ) const {
 	for ( PtrList<Entry>::iterator_t ptr = store.begin(); ptr != store.end(); ++ptr ) {
 		if ( *ptr == nullptr ) continue;
 		if ( (*ptr)->key == key ) return true;
@@ -93,8 +109,8 @@ bool Registry<K, V>::contains( const K& key ) const {
 	return false;
 }
 
-template <class K, class V>
-V* Registry<K, V>::get( const K& key ) const {
+template <class Key, class Value>
+Value* Registry<Key, Value>::get( const Key& key ) const {
 	for ( PtrList<Entry>::iterator_t ptr = store.begin(); ptr != store.end(); ++ptr ) {
 		if ( *ptr == nullptr ) continue;
 		if ( (*ptr)->key == key ) return (*ptr)->value;
@@ -102,8 +118,8 @@ V* Registry<K, V>::get( const K& key ) const {
 	return nullptr;
 }
 
-template <class K, class V>
-void Registry<K, V>::remove( V* value ) {
+template <class Key, class Value>
+void Registry<Key, Value>::remove( Value* value ) {
 	for ( PtrList<Entry>::iterator_t ptr = store.begin(); ptr != store.end(); ++ptr ) {
 		if ( *ptr == nullptr ) continue;
 		if ( (*ptr)->value == value ) {

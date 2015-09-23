@@ -6,7 +6,7 @@ template <class T>
 class PtrList {
 public:
 
-	PtrList( int maxSize = 10 );
+	PtrList( int maxSize = 20 );
 
 	PtrList( const PtrList<T>& rhs );
 
@@ -42,7 +42,7 @@ private:
 //		  Implementation 
 // =============================
 template <class T>
-PtrList<T>::PtrList( int maxSize = 10 ) : maxSize( maxSize ), count( 0 ) {
+PtrList<T>::PtrList( int maxSize = 20 ) : maxSize( maxSize ), count( 0 ) {
 	this->data = new T*[maxSize] { nullptr };
 }
 
@@ -60,10 +60,13 @@ PtrList<T>::PtrList( const PtrList<T>& rhs ) : maxSize( rhs.maxSize ), count( rh
 
 template<class T>
 PtrList<T>& PtrList<T>::operator=( const PtrList& rhs ) {
+	if ( this == rhs )
+		return this;
+
 	auto newData = new T*[rhs.maxSize] { nullptr };
 
 	for ( int i = 0; i < max( count, rhs.count ); ++i ) {
-		if ( i < count )
+		if ( i < count && data[i] != nullptr )
 			delete data[i];
 
 		if ( i < rhs.count && rhs.data[i] != nullptr ) {

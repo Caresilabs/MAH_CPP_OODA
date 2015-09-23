@@ -27,8 +27,8 @@ void test() {
 
 	/// Act
 
-	auto key3 = registry.get( 3 ); // Get
-	auto key13 = registry.get( 13 ); // Get
+	auto key3 = registry.get( 3 ); // Get key #3
+	auto key13 = registry.get( 13 ); // Get key #13
 
 	std::cout << "Remove Key #3, Toyota" << std::endl;
 	registry.remove( key3 ); // Remove
@@ -51,6 +51,8 @@ void test() {
 
 
 	Registry<int, Vehicle> copy( registry );
+
+	Registry<int, Vehicle> copy2 = copy;
 
 	std::cout << "The Registry should go out of scope! Expect 8 (4*2 because we copied) objects to get destroyed:" << std::endl;
 }
