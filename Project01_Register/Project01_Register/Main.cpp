@@ -17,7 +17,7 @@ void test() {
 
 	/// Arrange
 
-	Registry<int, Vehicle> registry( 3 );
+	Registry<int, Vehicle> registry( 3 ); // Show that it can grow
 	registry.put( 22, new Car( "Merca", 800 ) );
 	registry.put( 6, new Car( "Honda", 2000 ) );
 	registry.put( 4, new MotorCycle( "Fiat", 150 ) );
@@ -53,11 +53,13 @@ void test() {
 	Registry<int, Vehicle> copy( registry );
 
 	Registry<int, Vehicle> copy2 = copy;
+	//copy2 = copy;
 
-	std::cout << "The Registry should go out of scope! Expect 8 (4*2 because we copied) objects to get destroyed:" << std::endl;
+	std::cout << "The Registry should go out of scope! Expect 12 (4*3 because we copied twice) objects to get destroyed:" << std::endl;
 }
 
 int main() {
+	new int;
 
 	// Run our test
 	test();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <math.h>
+#include <algorithm>  
 
 template <class T>
 class PtrList {
@@ -60,12 +60,12 @@ PtrList<T>::PtrList( const PtrList<T>& rhs ) : maxSize( rhs.maxSize ), count( rh
 
 template<class T>
 PtrList<T>& PtrList<T>::operator=( const PtrList& rhs ) {
-	if ( this == rhs )
-		return this;
+	if ( this == &rhs )
+		return *this;
 
 	auto newData = new T*[rhs.maxSize] { nullptr };
 
-	for ( int i = 0; i < max( count, rhs.count ); ++i ) {
+	for ( int i = 0; i < std::max( count, rhs.count ); ++i ) {
 		if ( i < count && data[i] != nullptr )
 			delete data[i];
 

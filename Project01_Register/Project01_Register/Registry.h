@@ -72,8 +72,8 @@ Registry<Key, Value>::Registry( const Registry<Key, Value>& rhs ) : store( rhs.s
 
 template <class Key, class Value>
 Registry<Key, Value>& Registry<Key, Value>::operator=( const Registry<Key, Value>& rhs ) {
-	if ( this == rhs )
-		return this;
+	if ( this == &rhs )
+		return *this;
 
 	store = rhs.store;
 }
