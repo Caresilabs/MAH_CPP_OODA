@@ -18,9 +18,40 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AboutWindow.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="BoardPanel.h" />
+    <ClInclude Include="ComputerPlayer.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="HelpWindow.h" />
+    <ClInclude Include="LocalPlayer.h" />
+    <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="RemotePlayer.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerManager.h" />
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="SettingsWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AboutWindow.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="BoardPanel.cpp" />
+    <ClCompile Include="ComputerPlayer.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="HelpWindow.cpp" />
+    <ClCompile Include="LocalPlayer.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="RemotePlayer.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
+    <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="SettingsWindow.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F88B956D-B5F6-41C8-93F6-E3181FED83CB}</ProjectGuid>
-    <RootNamespace>DA2_Calculator</RootNamespace>
+    <ProjectGuid>{018D931F-C88A-4209-8ACD-293DFFA20B44}</ProjectGuid>
+    <RootNamespace>DA3_ClassDiagram_To_CPP</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -117,20 +148,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Calculator.h" />
-    <ClInclude Include="Controller.h" />
-    <ClInclude Include="IntegerNumber.h" />
-    <ClInclude Include="Main.h" />
-    <ClInclude Include="UserInterface.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Calculator.cpp" />
-    <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="IntegerNumber.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="UserInterface.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
