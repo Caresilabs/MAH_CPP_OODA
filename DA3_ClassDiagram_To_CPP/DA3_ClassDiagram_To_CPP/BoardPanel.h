@@ -1,13 +1,22 @@
 #pragma once
 
 
-class Board;
+namespace GUI {
+	class Board;
 
-class BoardPanel {
-public:
-	BoardPanel() = default;
+	/*
+	Draws the board.
+	*/
+	class BoardPanel {
+	public:
+		BoardPanel() = default;
 
-	void draw( Board* board );
+		/*
+		Draws the board.
+		@param the board to draw
+		*/
+		void draw(Board* board);
 
-};
+	};
+}
 

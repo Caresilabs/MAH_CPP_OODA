@@ -1,12 +1,17 @@
 #pragma once
 #include "Player.h"
-class ComputerPlayer : public Player {
-public:
-	ComputerPlayer( PlayerManager* manager, std::string name ) : Player( manager, name ) { }
+namespace Core {
+	/*
+	Simulates a real player using artificial intelligence.
+	*/
+	class ComputerPlayer : public Player {
+	public:
+		ComputerPlayer(PlayerManager* manager, std::string name) : Player(manager, name) { }
 
-private:
-	int* grid;
+	private:
+		int* grid;
 
-	int calculateBestMove();
-};
+		int calculateBestMove();
+	};
+}
 

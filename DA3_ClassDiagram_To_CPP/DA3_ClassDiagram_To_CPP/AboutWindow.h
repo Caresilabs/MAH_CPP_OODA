@@ -2,14 +2,19 @@
 
 #include <string>
 
-class AboutWindow {
-public:
-	AboutWindow() = default;
-private:
-	void close();
+namespace GUI {
 
-	std::string version;
-	std::string creator;
-	std::string dateOfCreation;
-};
+	/*
+	Displays an about window showing the creator and version.
+	*/
+	class AboutWindow {
+	public:
+		AboutWindow() = default;
+	private:
+		void close();
 
+		std::string version;
+		std::string creator;
+		std::string dateOfCreation;
+	};
+}

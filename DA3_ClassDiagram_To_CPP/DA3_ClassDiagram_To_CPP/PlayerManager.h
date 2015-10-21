@@ -3,24 +3,35 @@
 #include "Settings.h"
 #include "Controller.h"
 
-class Player;
+namespace Core {
+	class Player;
 
-class PlayerManager {
-public:
-	PlayerManager(Controller* controller, const Settings& settings);
+	/*
+	Manages input from the players and whose turn it is.
+	*/
+	class PlayerManager {
+	public:
+		PlayerManager(Controller* controller, const Settings& settings);
 
-	bool sendInput(Player* player, int position);
+		/*
+		Tries to insert a piece using the controller.
+		@param the player.
+		@param the x position on the board
+		@return if the move was valid
+		*/
+		bool sendInput(Player* player, int position);
 
-private:
-	Controller* controller;
+	private:
+		Controller* controller;
 
-	Player* playerA;
-	Player* playerB;
+		Player* playerA;
+		Player* playerB;
 
-	Player* currentTurn;
+		Player* currentTurn;
 
-	void switchPlayer();
-	void notifyOther( int position );
-	
-};
+		void switchPlayer();
+		void notifyOther(int position);
+
+	};
+}
 
