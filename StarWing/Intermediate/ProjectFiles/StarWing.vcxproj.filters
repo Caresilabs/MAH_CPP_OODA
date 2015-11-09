@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<None Include="..\..\StarWing.uproject" />
+		<Filter Include="Source">
+			<UniqueIdentifier>{3122EF2E-D366-434A-9B73-EB47BCC3063A}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\StarWing.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<None Include="..\..\Source\StarWingEditor.Target.cs">
+			<Filter>Source</Filter>
+		</None >
+		<Filter Include="Config">
+			<UniqueIdentifier>{15B91318-7ED6-479D-9D12-73300E12D216}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Config\DefaultEditor.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultEngine.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultGame.ini">
+			<Filter>Config</Filter>
+		</None >
+		<None Include="..\..\Config\DefaultInput.ini">
+			<Filter>Config</Filter>
+		</None >
+		<Filter Include="Source\StarWing">
+			<UniqueIdentifier>{96FB6DAD-3559-4003-9EED-EBD08786D551}</UniqueIdentifier>
+		</Filter>
+		<None Include="..\..\Source\StarWing\StarWing.Build.cs">
+			<Filter>Source\StarWing</Filter>
+		</None >
+		<ClCompile Include="..\..\Source\StarWing\StarWing.cpp">
+			<Filter>Source\StarWing</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\StarWing\StarWing.h">
+			<Filter>Source\StarWing</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\StarWing\StarWingGameMode.cpp">
+			<Filter>Source\StarWing</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\StarWing\StarWingGameMode.h">
+			<Filter>Source\StarWing</Filter>
+		</ClInclude >
+		<ClCompile Include="..\..\Source\StarWing\StarWingPawn.cpp">
+			<Filter>Source\StarWing</Filter>
+		</ClCompile >
+		<ClInclude Include="..\..\Source\StarWing\StarWingPawn.h">
+			<Filter>Source\StarWing</Filter>
+		</ClInclude >
+	</ItemGroup>
+</Project>
