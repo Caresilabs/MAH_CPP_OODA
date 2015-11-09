@@ -6,7 +6,7 @@ namespace Core {
 	*/
 	class Board {
 	public:
-		Board(int width, int height);
+		Board();
 
 		/*
 		Inserts a piece on the board.

@@ -23,9 +23,9 @@ namespace GUI {
 		void getMenuClick();
 
 		BoardPanel boardPanel;
-		Core::Controller* controller;
-		
+		Core::Controller controller;
 		char statusBar;
+
 		SettingsWindow settings;
 		HelpWindow help;
 		AboutWindow about;
