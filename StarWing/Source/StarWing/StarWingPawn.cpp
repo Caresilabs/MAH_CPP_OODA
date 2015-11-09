@@ -154,6 +154,6 @@ void AStarWingPawn::ShootInput(){
 
 void AStarWingPawn::RollInput() {
 	CurrentRollSpeed = 1750 * (CurrentRightSpeed < 0 ? -1 : 1);
-	CurrentRightSpeed *= 2.f;
+	CurrentRightSpeed *= 3.5f;
 }
 
