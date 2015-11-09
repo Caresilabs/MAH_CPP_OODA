@@ -34,9 +34,15 @@ AStarWingPawn::AStarWingPawn()
 	Camera->AttachTo(SpringArm, USpringArmComponent::SocketName);
 	Camera->bUsePawnControlRotation = false; // Don't rotate camera with controller
 
+	// Movement
+	//MovementComponent = 		CreateDefaultSubobject<UFloatingPawnMovement>("MovementComponent");
+	//	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
+
+	//>AddInputVector(pawn->GetActorForwardVector()*velocity.X*DeltaTime);
+
 	// Set handling parameters
 	Acceleration = 500.f;
-	TurnSpeed = 5000.f;
+	TurnSpeed = 900.f;
 	MaxSpeed = 4000.f;
 	MinSpeed = 500.f;
 	CurrentForwardSpeed = 500.f;
@@ -48,7 +54,7 @@ void AStarWingPawn::Tick(float DeltaSeconds)
 
 	// Move plan forwards (with sweep so we stop when we collide with things)
 	AddActorLocalOffset(LocalMove, true);
-
+	//Movement->AddInputVector(LocalMove);
 	AddActorWorldOffset(FVector(0, CurrentRightSpeed * DeltaSeconds, CurrentUpSpeed * DeltaSeconds));
 
 	// Calculate change in rotation this frame
@@ -109,7 +115,7 @@ void AStarWingPawn::MoveUpInput(float Val)
 	TargetSpeed += (FMath::Abs(CurrentRightSpeed) * -0.2f);
 
 	// Smoothly interpolate to target pitch speed
-	CurrentUpSpeed = -FMath::FInterpTo(CurrentUpSpeed, TargetSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
+	CurrentUpSpeed = FMath::FInterpTo(CurrentUpSpeed, TargetSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
 }
 
 void AStarWingPawn::MoveRightInput(float Val)
@@ -137,8 +143,8 @@ void AStarWingPawn::MoveRightInput(float Val)
 	// Is there any left/right input?
 	const bool bIsTurning = FMath::Abs(Val) > 0.2f;
 
-	float TargetRollSpeed = bIsTurning ? (CurrentRightSpeed * 0.5f) : (GetActorRotation().Roll * -2.f);
-	CurrentRollSpeed = FMath::FInterpTo(CurrentRollSpeed, 0, GetWorld()->GetDeltaSeconds(), 2.f);
+	float TargetRollSpeed = (GetActorRotation().Roll * -2.f); //bIsTurning ? (CurrentRightSpeed * 0.5f) : 
+	CurrentRollSpeed = FMath::FInterpTo(CurrentRollSpeed, TargetRollSpeed, GetWorld()->GetDeltaSeconds(), 5.f);
 }
 
 void AStarWingPawn::ShootInput(){
@@ -147,5 +153,7 @@ void AStarWingPawn::ShootInput(){
 
 
 void AStarWingPawn::RollInput() {
-	CurrentRollSpeed = 750 * (CurrentRollSpeed < 0 ? -1 : 1);
+	CurrentRollSpeed = 1750 * (CurrentRightSpeed < 0 ? -1 : 1);
+	CurrentRightSpeed *= 2.f;
 }
+

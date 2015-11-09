@@ -3,24 +3,27 @@
 #include "GameFramework/Pawn.h"
 #include "StarWingPawn.generated.h"
 
+
 UCLASS(config=Game)
 class AStarWingPawn : public APawn
 {
 	GENERATED_BODY()
 
+public:
+
+	AStarWingPawn();
+
 	/** StaticMesh component that will be the visuals for our flying pawn */
 	UPROPERTY(Category = Mesh, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class UStaticMeshComponent* PlaneMesh;
+	UStaticMeshComponent* PlaneMesh;
 
 	/** Spring arm that will offset the camera */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* SpringArm;
+	USpringArmComponent* SpringArm;
 
 	/** Camera component that will be our viewpoint */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* Camera;
-public:
-	AStarWingPawn();
+	UCameraComponent* Camera;
 
 	// Begin AActor overrides
 	virtual void Tick(float DeltaSeconds) override;
