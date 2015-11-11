@@ -24,6 +24,9 @@ void MainWindow::showMenu() {
 		while (state == Core::Controller::State::Playing) {
 			boardPanel.draw(controller->getBoard());
 		}
+		if (state == Core::Controller::State::GameOver) {
+
+		}
 		break;
 	}
 	case 2:
