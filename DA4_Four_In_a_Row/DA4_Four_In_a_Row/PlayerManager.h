@@ -13,6 +13,8 @@ namespace Core {
 	public:
 		PlayerManager(Controller* controller, const Settings& settings);
 
+		void start();
+
 		/*
 		Tries to insert a piece using the controller.
 		@param the player.

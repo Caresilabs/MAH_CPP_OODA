@@ -5,6 +5,7 @@
 #include "AboutWindow.h"
 #include "Controller.h"
 #include "SettingsWindow.h"
+#include "Settings.h"
 
 namespace GUI {
 	/*
@@ -14,17 +15,21 @@ namespace GUI {
 	public:
 		MainWindow();
 
+		~MainWindow();
+
 	private:
+		void showMenu();
 		void showHelp();
 		void showAbout();
-		void showSettings();
+
+		Core::Settings showSettings();
 		void restartGame();
 
 		void getMenuClick();
 
 		BoardPanel boardPanel;
 		Core::Controller* controller;
-		
+
 		char statusBar;
 		SettingsWindow settings;
 		HelpWindow help;

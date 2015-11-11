@@ -1,7 +1,9 @@
 #include <iostream>
+#include "MainWindow.h"
 
 void main() {
-	std::cout << "hej;";
+	GUI::MainWindow mainWindow;
+
 	return;
 }
 

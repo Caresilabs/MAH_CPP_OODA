@@ -10,6 +10,7 @@ namespace GUI {
 	class AboutWindow {
 	public:
 		AboutWindow() = default;
+		void show();
 	private:
 		void close();
 

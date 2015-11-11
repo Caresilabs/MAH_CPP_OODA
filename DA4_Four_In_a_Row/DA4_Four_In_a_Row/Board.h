@@ -6,6 +6,11 @@ namespace Core {
 	*/
 	class Board {
 	public:
+
+		enum State {
+			Full, Invalid, Win, Valid
+		};
+
 		Board(int width, int height);
 
 		/*
@@ -14,14 +19,22 @@ namespace Core {
 		@param the x position on the board
 		@return if the move was valid
 		*/
-		bool insert(int playerId, int x);
+		State insert(int playerId, int x);
+
+		int getWidth() const { return width; }
+		int getHeight() const { return height; }
+
+		int** getGrid() const { return grid; }
 
 		~Board();
 	private:
-		int* grid;
+		int** grid;
+		
+		int width;
+		int height;
 
-		void checkWin();
-		void checkFull();
+		bool checkWin();
+		bool checkFull();
 	};
 }
 

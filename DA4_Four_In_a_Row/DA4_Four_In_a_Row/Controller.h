@@ -12,9 +12,13 @@ namespace Core {
 	*/
 	class Controller {
 	public:
-		Controller(Settings settings);
+		enum State {
+			GameOver, Playing, Exit
+		};
 
-		void startGame();
+		Controller();
+
+		void startGame(Settings settings);
 		void restartGame();
 		void exitGame();
 
@@ -26,11 +30,15 @@ namespace Core {
 		*/
 		bool makeMove(int player, int x);
 
-		const Board* getBoard() const;
+		const Board* getBoard() const { return board; }
+		const State getState() const { return state; }
+
+		~Controller();
 
 	private:
 		Board* board;
 		PlayerManager* playerManager;
+		State state;
 	};
 }
 

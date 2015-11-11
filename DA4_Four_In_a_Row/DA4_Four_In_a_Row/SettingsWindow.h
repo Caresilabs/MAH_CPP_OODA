@@ -10,6 +10,7 @@ namespace GUI {
 	class SettingsWindow {
 	public:
 		SettingsWindow() = default;
+		Core::Settings show();
 	private:
 		Core::Settings generateSettingsFromUI();
 	};

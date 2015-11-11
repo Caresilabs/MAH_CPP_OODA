@@ -22,15 +22,15 @@ namespace Core {
 		@param the x position on the board
 		@return if the move was valid
 		*/
-		virtual bool send(int position) = 0;
+		bool send(int position);
 
 		/*
 		Get's the other players move.
 		@param the x position on the board
 		*/
-		virtual void revieve(int position) = 0;
+		virtual void recieve(int position) = 0;
 
-	private:
+	protected:
 		PlayerManager* manager;
 		std::string name;
 	};

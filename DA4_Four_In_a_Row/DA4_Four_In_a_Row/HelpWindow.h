@@ -10,6 +10,7 @@ namespace GUI {
 	class HelpWindow {
 	public:
 		HelpWindow() = default;
+		void show();
 	private:
 		void showHTML();
 		const static std::string path;

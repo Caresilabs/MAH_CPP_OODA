@@ -8,7 +8,10 @@ namespace Core {
 	*/
 	class LocalPlayer : public Player {
 	public:
-		LocalPlayer(PlayerManager* manager, std::string name) : Player(manager, name) { }
+		LocalPlayer(PlayerManager* manager, std::string name) : Player(manager, name) { 
+		}
+
+		virtual void recieve(int position) override;
 	private:
 		void readMouse();
 

@@ -1,8 +1,11 @@
 #pragma once
 
+namespace Core {
+	class Board;
+}
 
 namespace GUI {
-	class Board;
+
 
 	/*
 	Draws the board.
@@ -15,7 +18,7 @@ namespace GUI {
 		Draws the board.
 		@param the board to draw
 		*/
-		void draw(Board* board);
+		void draw(const Core::Board* board);
 
 	};
 }
