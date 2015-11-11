@@ -80,7 +80,7 @@ private:
 	//float CurrentYawSpeed;
 
 	/** Current pitch speed */
-	//float CurrentPitchSpeed;
+	float CurrentPitchSpeed;
 
 	/** Current roll speed */
 	//float CurrentRollSpeed;

@@ -59,7 +59,7 @@ void AStarWingPawn::Tick(float DeltaSeconds)
 
 	// Calculate change in rotation this frame
 	FRotator DeltaRotation(0,0,0);
-	//DeltaRotation.Pitch = CurrentPitchSpeed * DeltaSeconds;
+	DeltaRotation.Pitch = CurrentPitchSpeed * DeltaSeconds;
 	//DeltaRotation.Yaw = CurrentYawSpeed * DeltaSeconds;
 	DeltaRotation.Roll = CurrentRollSpeed * DeltaSeconds;
 
@@ -111,6 +111,13 @@ void AStarWingPawn::MoveUpInput(float Val)
 	// Target pitch speed is based in input
 	float TargetSpeed = (Val * TurnSpeed);
 
+	float TargetPitchSpeed = 0.f;
+	const bool bIsTurning = FMath::Abs(Val) > 0.2f;
+	if (bIsTurning) {
+		TargetPitchSpeed = (GetActorRotation().Pitch + (CurrentUpSpeed < 0 ? -20 : 20));
+	}
+	CurrentPitchSpeed = FMath::FInterpTo(CurrentPitchSpeed, TargetPitchSpeed, GetWorld()->GetDeltaSeconds(), 5.f);
+
 	// When steering, we decrease pitch slightly
 	TargetSpeed += (FMath::Abs(CurrentRightSpeed) * -0.2f);
 
@@ -144,6 +151,9 @@ void AStarWingPawn::MoveRightInput(float Val)
 	const bool bIsTurning = FMath::Abs(Val) > 0.2f;
 
 	float TargetRollSpeed = (GetActorRotation().Roll * -2.f); //bIsTurning ? (CurrentRightSpeed * 0.5f) : 
+	if (bIsTurning && CurrentRollSpeed < 400)
+		TargetRollSpeed = (GetActorRotation().Roll) * (CurrentRightSpeed < 0 ? -5 : 5);
+
 	CurrentRollSpeed = FMath::FInterpTo(CurrentRollSpeed, TargetRollSpeed, GetWorld()->GetDeltaSeconds(), 5.f);
 }
 
