@@ -2,6 +2,8 @@
 
 #include "StarWing.h"
 #include "StarWingPawn.h"
+#include "StarWingGameMode.h"
+#include "Bullet.h"
 
 AStarWingPawn::AStarWingPawn()
 {
@@ -24,7 +26,7 @@ AStarWingPawn::AStarWingPawn()
 	// Create a spring arm component
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm0"));
 	SpringArm->AttachTo(RootComponent);
-	SpringArm->TargetArmLength = 160.0f; // The camera follows at this distance behind the character	
+	SpringArm->TargetArmLength = 250.0f; // The camera follows at this distance behind the character	
 	SpringArm->SocketOffset = FVector(0.f,0.f,60.f);
 	SpringArm->bEnableCameraLag = false;
 	SpringArm->CameraLagSpeed = 15.f;
@@ -34,6 +36,8 @@ AStarWingPawn::AStarWingPawn()
 	Camera->AttachTo(SpringArm, USpringArmComponent::SocketName);
 	Camera->bUsePawnControlRotation = false; // Don't rotate camera with controller
 
+	Explosion = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Explosions"));
+	Explosion->AttachTo(RootComponent);
 	// Movement
 	//MovementComponent = 		CreateDefaultSubobject<UFloatingPawnMovement>("MovementComponent");
 	//	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
@@ -42,9 +46,9 @@ AStarWingPawn::AStarWingPawn()
 
 	// Set handling parameters
 	Acceleration = 500.f;
-	TurnSpeed = 900.f;
-	MaxSpeed = 4000.f;
-	MinSpeed = 500.f;
+	TurnSpeed = 1500.f;
+	MaxSpeed = 3500.f;
+	MinSpeed = 300.f;
 	CurrentForwardSpeed = 500.f;
 }
 
@@ -70,14 +74,27 @@ void AStarWingPawn::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 }
 
+void AStarWingPawn::Destroyed()  {
+	Explosion->ActivateSystem();
+	Super::Destroy();
+}
+
 void AStarWingPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
+	
+	if (OtherComp->ComponentHasTag(TEXT("Destroyable"))) {
+		// Set velocity to zero upon collision
+		CurrentForwardSpeed = 0.f;
+		CurrentRightSpeed = 0.f;
+		CurrentUpSpeed = 0.f;
+		Other->Destroy();
+	} else {
+		CurrentUpSpeed = MaxSpeed / 4.f;
+	}
 
-	// Set velocity to zero upon collision
-	CurrentForwardSpeed = 0.f;
-	CurrentRightSpeed = 0.f;
-	CurrentUpSpeed = 0.f;
+	AStarWingGameMode* gm = (AStarWingGameMode*)GetWorld()->GetAuthGameMode();
+	gm->health -= AStarWingGameMode::CRASH_TIME_PENALTY;
 }
 
 
@@ -96,6 +113,13 @@ void AStarWingPawn::SetupPlayerInputComponent(class UInputComponent* InputCompon
 
 void AStarWingPawn::ThrustInput(float Val)
 {
+	AStarWingGameMode* gm = (AStarWingGameMode*)GetWorld()->GetAuthGameMode();
+	if (gm->boost <= 0)
+		return;
+
+	gm->boost -= AStarWingGameMode::BOOST_COST * GetWorld()->DeltaTimeSeconds * ((Val*2)-1.f);
+	gm->boost = FMath::Clamp(gm->boost, 0.f, 100.f);
+
 	// Is there no input?
 	bool bHasInput = !FMath::IsNearlyEqual(Val, 0.f);
 	// If input is not held down, reduce speed
@@ -114,7 +138,7 @@ void AStarWingPawn::MoveUpInput(float Val)
 	float TargetPitchSpeed = 0.f;
 	const bool bIsTurning = FMath::Abs(Val) > 0.2f;
 	if (bIsTurning) {
-		TargetPitchSpeed = (GetActorRotation().Pitch + (CurrentUpSpeed < 0 ? -20 : 20));
+		TargetPitchSpeed = ((CurrentUpSpeed < 0 ? -20 : 20) - GetActorRotation().Pitch);
 	}
 	CurrentPitchSpeed = FMath::FInterpTo(CurrentPitchSpeed, TargetPitchSpeed, GetWorld()->GetDeltaSeconds(), 5.f);
 
@@ -151,19 +175,20 @@ void AStarWingPawn::MoveRightInput(float Val)
 	const bool bIsTurning = FMath::Abs(Val) > 0.2f;
 
 	float TargetRollSpeed = (GetActorRotation().Roll * -2.f); //bIsTurning ? (CurrentRightSpeed * 0.5f) : 
+	
 	if (bIsTurning && CurrentRollSpeed < 400)
-		TargetRollSpeed = (GetActorRotation().Roll) * (CurrentRightSpeed < 0 ? -5 : 5);
+		TargetRollSpeed = (CurrentRightSpeed < 0 ? -20 : 20) - (GetActorRotation().Roll);
 
 	CurrentRollSpeed = FMath::FInterpTo(CurrentRollSpeed, TargetRollSpeed, GetWorld()->GetDeltaSeconds(), 5.f);
 }
 
 void AStarWingPawn::ShootInput(){
-
+	auto bullet = GetWorld()->SpawnActor(ABullet::StaticClass(), &FVector(), &FRotator());
 }
 
 
 void AStarWingPawn::RollInput() {
 	CurrentRollSpeed = 1750 * (CurrentRightSpeed < 0 ? -1 : 1);
-	CurrentRightSpeed *= 3.5f;
+	CurrentRightSpeed = 3200.0f * (CurrentRightSpeed < 0 ? -1 : 1);
 }
 

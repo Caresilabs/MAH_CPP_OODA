@@ -9,7 +9,22 @@ class AStarWingGameMode : public AGameMode
 	GENERATED_BODY()
 
 public:
+	static const int START_TIME = 30;
+	static const int CRASH_TIME_PENALTY = 10;
+	static const int BOOST_COST = 20;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Score)
+	float time;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float health;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float boost;
+
 	AStarWingGameMode();
+
+	virtual void Tick(float DeltaSeconds) override;
 };
 
 
