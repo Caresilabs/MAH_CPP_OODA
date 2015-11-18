@@ -11,8 +11,10 @@ AStarWingPawn::AStarWingPawn()
 	struct FConstructorStatics
 	{
 		ConstructorHelpers::FObjectFinderOptional<UStaticMesh> PlaneMesh;
+		ConstructorHelpers::FObjectFinderOptional<UParticleSystem> Explosion;
 		FConstructorStatics()
-			: PlaneMesh(TEXT("/Game/Flying/Meshes/UFO.UFO"))
+			: PlaneMesh(TEXT("/Game/Flying/Meshes/UFO.UFO")), 
+				Explosion(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Explosion.P_Explosion'"))
 		{
 		}
 	};
@@ -36,14 +38,13 @@ AStarWingPawn::AStarWingPawn()
 	Camera->AttachTo(SpringArm, USpringArmComponent::SocketName);
 	Camera->bUsePawnControlRotation = false; // Don't rotate camera with controller
 
+
 	Explosion = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Explosions"));
+	if ( ConstructorStatics.Explosion.Succeeded() ) {
+		Explosion->SetTemplate( ConstructorStatics.Explosion.Get() );
+	}
 	Explosion->AttachTo(RootComponent);
-	// Movement
-	//MovementComponent = 		CreateDefaultSubobject<UFloatingPawnMovement>("MovementComponent");
-	//	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
-
-	//>AddInputVector(pawn->GetActorForwardVector()*velocity.X*DeltaTime);
-
+	
 	// Set handling parameters
 	Acceleration = 800.f;
 	TurnSpeed = 1500.f;
@@ -79,9 +80,13 @@ void AStarWingPawn::Destroyed()  {
 	Super::Destroy();
 }
 
+
 void AStarWingPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
+
+	if ( dynamic_cast<ABullet*>(Other) != nullptr )
+		return;
 	
 	if (OtherComp->ComponentHasTag(TEXT("Destroyable"))) {
 		// Set velocity to zero upon collision
@@ -119,7 +124,7 @@ void AStarWingPawn::ThrustInput(float Val)
 	if (gm->boost <= 0)
 		return;
 
-	gm->boost -= AStarWingGameMode::BOOST_COST * GetWorld()->DeltaTimeSeconds * ((Val*2)-1.f);
+	gm->boost -= AStarWingGameMode::BOOST_COST * GetWorld()->DeltaTimeSeconds * Val; //((Val*2)-1.f
 	gm->boost = FMath::Clamp(gm->boost, 0.f, 100.f);
 
 	// Is there no input?
@@ -153,24 +158,6 @@ void AStarWingPawn::MoveUpInput(float Val)
 
 void AStarWingPawn::MoveRightInput(float Val)
 {
-	/*
-	// Target yaw speed is based on input
-	float TargetYawSpeed = (Val * TurnSpeed);
-
-	// Smoothly interpolate to target yaw speed
-	CurrentYawSpeed = FMath::FInterpTo(CurrentYawSpeed, TargetYawSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
-
-	// Is there any left/right input?
-	const bool bIsTurning = FMath::Abs(Val) > 0.2f;
-
-	// If turning, yaw value is used to influence roll
-	// If not turning, roll to reverse current roll value
-	float TargetRollSpeed = bIsTurning ? (CurrentYawSpeed * 0.5f) : (GetActorRotation().Roll * -2.f);
-
-	// Smoothly interpolate roll speed
-	CurrentRollSpeed = FMath::FInterpTo(CurrentRollSpeed, TargetRollSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
-	*/
-
 	float TargetSpeed = (Val * TurnSpeed);
 	CurrentRightSpeed = FMath::FInterpTo(CurrentRightSpeed, TargetSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
 
@@ -190,6 +177,9 @@ void AStarWingPawn::ShootInput(){
 	const FRotator rot = PlaneMesh->GetSocketRotation( "ShootSocket" );
 
 	ABullet* bullet = Cast<ABullet>(GetWorld()->SpawnActor( ABullet::StaticClass(), &pos, &rot ));
+	bullet->SetShooter( this );
+	bullet->SetDirection( GetActorForwardVector() );
+	bullet->SetSpeed( CurrentForwardSpeed*11.0f );
 }
 
 

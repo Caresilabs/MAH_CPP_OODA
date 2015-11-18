@@ -17,13 +17,19 @@ void AStarWingGameMode::Tick(float DeltaSeconds)
 {
 	
 
-	if (time <= 0 && !isDead) {
+	if ((time <= 0 || health <= 0) && !isDead) {
 
-		auto  pawn = Cast<AStarWingPawn>( DefaultPawnClass );
-		pawn->PlaneMesh->SetVisibility( false );
-		pawn->Explosion->Activate();
+		AStarWingPawn*  pawn = Cast<AStarWingPawn>( DefaultPawnClass.GetDefaultObject() );
+		pawn->Explosion->Activate( true );
+
+		//pawn->PlaneMesh->SetVisibility( false );
+		//pawn->SetActorTickEnabled( false );
+
+		pawn->Destroy();
+
 
 		isDead = true;
+
 		//UGameplayStatics::CreateParticleSystem( pawn->Explosion->get, GetWorld(), pawn, true );
 		//auto partclSystem = CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("MyParticle"));
 		//partclSystem->AttachTo(MeshVariable, "ASocketOfYourChoosing");
