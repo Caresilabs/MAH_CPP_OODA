@@ -86,6 +86,7 @@
     <ClInclude Include="ComputerPlayer.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="HelpWindow.h" />
+    <ClInclude Include="IBoardUpdateCallback.h" />
     <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Player.h" />

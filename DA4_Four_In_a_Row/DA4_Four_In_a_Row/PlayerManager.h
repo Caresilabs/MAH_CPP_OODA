@@ -23,6 +23,8 @@ namespace Core {
 		*/
 		bool sendInput(Player* player, int position);
 
+		~PlayerManager();
+
 	private:
 		Controller* controller;
 

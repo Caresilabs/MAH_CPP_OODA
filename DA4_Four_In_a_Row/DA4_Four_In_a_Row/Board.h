@@ -11,7 +11,7 @@ namespace Core {
 			Full, Invalid, Win, Valid
 		};
 
-		Board(int width, int height);
+		Board(int width, int height, int rowsToWin);
 
 		/*
 		Inserts a piece on the board.
@@ -32,8 +32,11 @@ namespace Core {
 		
 		int width;
 		int height;
+		int rowsToWin;
 
-		bool checkWin();
+		bool checkWin(int player, int x, int y);
+		int findCount(int player, int x, int y, int dirX, int dirY);
+
 		bool checkFull();
 	};
 }

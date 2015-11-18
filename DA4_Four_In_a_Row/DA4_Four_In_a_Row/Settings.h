@@ -9,7 +9,9 @@ namespace Core {
 	struct Settings {
 	public:
 		enum class GameType {
-			PlayerAVSPlayerB
+			PlayerVSPlayer,
+			PlayerVSComputer,
+			PlayerVSRemote
 		};
 
 		Settings() = default;

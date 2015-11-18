@@ -12,5 +12,13 @@ Core::Settings SettingsWindow::generateSettingsFromUI() {
 	settings.gridHeight = 10;
 	settings.gridWidth = 10;
 
+	settings.whoStarts = 1;
+	settings.rowsToWin = 4;
+
+	settings.playerNameA = "PlayerA";
+	settings.playerNameB = "PlayerB";
+
+	settings.gameType = Core::Settings::GameType::PlayerVSComputer;
+
 	return settings;
 }

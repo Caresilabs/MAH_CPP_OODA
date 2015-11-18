@@ -30,6 +30,8 @@ namespace Core {
 		*/
 		virtual void recieve(int position) = 0;
 
+		std::string getName() const { return name; };
+
 	protected:
 		PlayerManager* manager;
 		std::string name;

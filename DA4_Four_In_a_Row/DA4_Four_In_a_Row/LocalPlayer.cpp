@@ -6,7 +6,9 @@ using namespace Core;
 void LocalPlayer::readMouse() {
 	int pos;
 	std::cin >> pos;
-	send(pos);
+	if (!send(pos)) {
+		readMouse();
+	}
 }
 
 

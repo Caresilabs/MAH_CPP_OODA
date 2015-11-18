@@ -3,13 +3,16 @@
 
 using namespace Core;
 
-Controller::Controller() {
+Controller::Controller(Core::IBoardUpdateCallback* callback) : boardUpdateCallback(callback){
 }
 
-void Controller::startGame(Settings settings) {
+void Controller::setupNewGame(Settings settings) {
 	state = Playing;
+	board = new Board(settings.gridWidth, settings.gridHeight, settings.rowsToWin);
 	playerManager = new PlayerManager(this, settings);
-	board = new Board(settings.gridWidth, settings.gridHeight);
+}
+
+void Controller::startGame() {
 	playerManager->start();
 }
 
@@ -18,11 +21,12 @@ void Controller::restartGame() {
 	delete board;
 
 	// TODO
-	startGame(Settings());
+	setupNewGame(Settings());
 }
 
 void Controller::exitGame() {
 	state = Exit;
+	delete playerManager;
 }
 
 /*
@@ -33,19 +37,30 @@ Inserts a piece on the board.
 */
 bool Controller::makeMove(int player, int x) {
 	Board::State state = board->insert(player, x);
+
 	switch (state)
 	{
 	case Core::Board::Full:
-		return true;
+		this->state = State::GameOver;
+		break;
 	case Core::Board::Invalid:
-		return false;
+		break;
 	case Core::Board::Win:
-		return true;
+		this->state = State::GameOver;
+		break;
 	case Core::Board::Valid:
-		return true;
+		break;
 	default:
 		break;
 	}
+
+	boardUpdateCallback->onBoardUpdate();
+
+	if (state == Board::Invalid) {
+		return false;
+	}
+
+	return true;
 }
 
 Controller::~Controller() {

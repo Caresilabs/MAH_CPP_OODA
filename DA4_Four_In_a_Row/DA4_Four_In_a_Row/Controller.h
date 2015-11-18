@@ -2,6 +2,7 @@
 
 #include "Board.h"
 #include "Settings.h"
+#include "IBoardUpdateCallback.h"
 
 namespace Core {
 	class PlayerManager;
@@ -16,9 +17,11 @@ namespace Core {
 			GameOver, Playing, Exit
 		};
 
-		Controller();
+		Controller(IBoardUpdateCallback* callback);
 
-		void startGame(Settings settings);
+		void setupNewGame(Settings settings);
+		void startGame();
+
 		void restartGame();
 		void exitGame();
 
@@ -38,6 +41,7 @@ namespace Core {
 	private:
 		Board* board;
 		PlayerManager* playerManager;
+		Core::IBoardUpdateCallback* boardUpdateCallback;
 		State state;
 	};
 }

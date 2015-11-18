@@ -6,12 +6,13 @@
 #include "Controller.h"
 #include "SettingsWindow.h"
 #include "Settings.h"
+#include "IBoardUpdateCallback.h"
 
 namespace GUI {
 	/*
 	Is a GUI container for frame, status bar and menu.
 	*/
-	class MainWindow {
+	class MainWindow : public Core::IBoardUpdateCallback {
 	public:
 		MainWindow();
 
@@ -24,6 +25,8 @@ namespace GUI {
 
 		Core::Settings showSettings();
 		void restartGame();
+
+		virtual void onBoardUpdate() override;
 
 		void getMenuClick();
 

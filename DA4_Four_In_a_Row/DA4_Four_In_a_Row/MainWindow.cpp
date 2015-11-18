@@ -4,12 +4,12 @@
 using namespace GUI;
 
 MainWindow::MainWindow() {
-	controller = new Core::Controller();
+	controller = new Core::Controller(dynamic_cast<Core::IBoardUpdateCallback*>(this));
 	showMenu();
 }
 
 void MainWindow::showMenu() {
-	std::cout << "Welcome!\nChoose an option:\n1. Start game\n2. Show help\n3. Show about\n3. Exit\n=";
+	std::cout << "Welcome!\nChoose an option:\n1. Start game\n2. Show help\n3. Show about\n0. Exit\n=";
 
 	int option;
 	std::cin >> option;
@@ -19,14 +19,23 @@ void MainWindow::showMenu() {
 	case 1:
 	{
 		Core::Settings settings = showSettings();
-		controller->startGame(settings);
-		Core::Controller::State state = controller->getState();
-		while (state == Core::Controller::State::Playing) {
-			boardPanel.draw(controller->getBoard());
-		}
-		if (state == Core::Controller::State::GameOver) {
+		
+		controller->setupNewGame(settings);
+		
+		// Draw initial board
+		onBoardUpdate();
 
-		}
+		controller->startGame();
+
+		// Clean up
+		controller->exitGame();
+		
+		//	while (state == Core::Controller::State::Playing) {
+			
+		//}
+		//if (state == Core::Controller::State::GameOver) {
+
+		//}
 		break;
 	}
 	case 2:
@@ -35,7 +44,7 @@ void MainWindow::showMenu() {
 	case 3:
 		showAbout();
 		break;
-	case 4:
+	case 0:
 		exit(0);
 		break;
 	default:
@@ -44,6 +53,18 @@ void MainWindow::showMenu() {
 
 	system("cls");
 	showMenu();
+}
+
+void MainWindow::onBoardUpdate() {
+	boardPanel.draw(controller->getBoard());
+
+	Core::Controller::State state = controller->getState();
+	if (state == Core::Controller::State::GameOver) {
+		
+		//system("cls");
+		std::cout << "Game Over!\n";
+		system("PAUSE");
+	}
 }
 
 void MainWindow::showHelp(){
