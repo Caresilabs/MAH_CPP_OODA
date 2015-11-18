@@ -4,7 +4,7 @@
 #include "StarWingGameMode.h"
 #include "StarWingPawn.h"
 
-AStarWingGameMode::AStarWingGameMode()
+AStarWingGameMode::AStarWingGameMode() : isDead(false)
 {
 	// set default pawn class to our flying pawn
 	DefaultPawnClass = AStarWingPawn::StaticClass();
@@ -15,20 +15,24 @@ AStarWingGameMode::AStarWingGameMode()
 
 void AStarWingGameMode::Tick(float DeltaSeconds)
 {
-	boost += DeltaSeconds;
-	time -= DeltaSeconds;
+	
 
-	if (time <= 0) {
-		//DefaultPawnClass->poss
-		//Cast<AStarWingPawn>(DefaultPawnClass)->Destroy();
+	if (time <= 0 && !isDead) {
 
+		auto  pawn = Cast<AStarWingPawn>( DefaultPawnClass );
+		pawn->PlaneMesh->SetVisibility( false );
+		pawn->Explosion->Activate();
 
-		//UGameplayStatics::SpawnEmitterAtLocation()
+		isDead = true;
+		//UGameplayStatics::CreateParticleSystem( pawn->Explosion->get, GetWorld(), pawn, true );
 		//auto partclSystem = CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("MyParticle"));
 		//partclSystem->AttachTo(MeshVariable, "ASocketOfYourChoosing");
 		//->cast
 		//GetWorld()->findac
 		//GetWorld()->SpawnActor()
+	} else {
+		boost += DeltaSeconds;
+		time -= DeltaSeconds;
 	}
 
 	// Call any parent class Tick implementation

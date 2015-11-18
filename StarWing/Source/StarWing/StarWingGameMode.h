@@ -25,6 +25,9 @@ public:
 	AStarWingGameMode();
 
 	virtual void Tick(float DeltaSeconds) override;
+
+private:
+	bool isDead;
 };
 
 

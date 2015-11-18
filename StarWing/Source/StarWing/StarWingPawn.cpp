@@ -45,9 +45,9 @@ AStarWingPawn::AStarWingPawn()
 	//>AddInputVector(pawn->GetActorForwardVector()*velocity.X*DeltaTime);
 
 	// Set handling parameters
-	Acceleration = 500.f;
+	Acceleration = 800.f;
 	TurnSpeed = 1500.f;
-	MaxSpeed = 3500.f;
+	MaxSpeed = 2800.f;
 	MinSpeed = 300.f;
 	CurrentForwardSpeed = 500.f;
 }
@@ -64,7 +64,7 @@ void AStarWingPawn::Tick(float DeltaSeconds)
 	// Calculate change in rotation this frame
 	FRotator DeltaRotation(0,0,0);
 	DeltaRotation.Pitch = CurrentPitchSpeed * DeltaSeconds;
-	//DeltaRotation.Yaw = CurrentYawSpeed * DeltaSeconds;
+	DeltaRotation.Yaw = -GetActorRotation().Yaw * DeltaSeconds;	// CurrentYawSpeed * DeltaSeconds;
 	DeltaRotation.Roll = CurrentRollSpeed * DeltaSeconds;
 
 	// Rotate plane
@@ -91,6 +91,8 @@ void AStarWingPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* O
 		Other->Destroy();
 	} else {
 		CurrentUpSpeed = MaxSpeed / 4.f;
+		CurrentForwardSpeed *= -1.f;
+		CurrentRightSpeed *= -1.f;
 	}
 
 	AStarWingGameMode* gm = (AStarWingGameMode*)GetWorld()->GetAuthGameMode();
@@ -168,6 +170,7 @@ void AStarWingPawn::MoveRightInput(float Val)
 	// Smoothly interpolate roll speed
 	CurrentRollSpeed = FMath::FInterpTo(CurrentRollSpeed, TargetRollSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
 	*/
+
 	float TargetSpeed = (Val * TurnSpeed);
 	CurrentRightSpeed = FMath::FInterpTo(CurrentRightSpeed, TargetSpeed, GetWorld()->GetDeltaSeconds(), 2.f);
 
@@ -183,11 +186,22 @@ void AStarWingPawn::MoveRightInput(float Val)
 }
 
 void AStarWingPawn::ShootInput(){
-	auto bullet = GetWorld()->SpawnActor(ABullet::StaticClass(), &FVector(), &FRotator());
+	const FVector pos = PlaneMesh->GetSocketLocation( "ShootSocket" );
+	const FRotator rot = PlaneMesh->GetSocketRotation( "ShootSocket" );
+
+	ABullet* bullet = Cast<ABullet>(GetWorld()->SpawnActor( ABullet::StaticClass(), &pos, &rot ));
 }
 
 
 void AStarWingPawn::RollInput() {
+	
+	AStarWingGameMode* gm = (AStarWingGameMode*)GetWorld()->GetAuthGameMode();
+	if ( gm->boost - AStarWingGameMode::BOOST_COST * 2.f <= 0 )
+		return;
+
+	gm->boost -= AStarWingGameMode::BOOST_COST * 2.f;
+	gm->boost = FMath::Clamp( gm->boost, 0.f, 100.f );
+
 	CurrentRollSpeed = 1750 * (CurrentRightSpeed < 0 ? -1 : 1);
 	CurrentRightSpeed = 3200.0f * (CurrentRightSpeed < 0 ? -1 : 1);
 }
