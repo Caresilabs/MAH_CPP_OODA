@@ -2,12 +2,11 @@
 
 #include "StarWing.h"
 #include "StarWingGameMode.h"
-#include "StarWingPawn.h"
 
 AStarWingGameMode::AStarWingGameMode() : isDead(false)
 {
 	// set default pawn class to our flying pawn
-	DefaultPawnClass = AStarWingPawn::StaticClass();
+	//DefaultPawnClass = AStarWingPawn::StaticClass();
 	time = START_TIME;
 	health = 100.f;
 	boost = 100.f;
@@ -17,10 +16,30 @@ void AStarWingGameMode::Tick(float DeltaSeconds)
 {
 	
 
-	if ((time <= 0 || health <= 0) && !isDead) {
+	if ((time <= 0 || health <= 0)) {
 
-		AStarWingPawn*  pawn = Cast<AStarWingPawn>( DefaultPawnClass.GetDefaultObject() );
-		pawn->Explosion->Activate( true );
+		if ( isDead )
+			return;
+
+		
+
+
+		//TSubclassOf<AStarWingPawn> ClassToFind;
+		//TArray<AActor*> FoundActors;
+		//UGameplayStatics::GetAllActorsOfClass( GetWorld(), ClassToFind, FoundActors );
+		
+		///if ( FoundActors.Num() == 0 )
+		//	return;
+
+		//AStarWingPawn*  pawn = Cast<AStarWingPawn>( DefaultPawnClass.GetDefaultObject() );
+		
+		//auto pawn = FoundActors[0];
+
+		auto pawn = Cast<AStarWingPawn>(UGameplayStatics::GetPlayerPawn( GetWorld(), 0 ));
+
+		//pawn->Explosion->Activate( true );
+
+		UGameplayStatics::SpawnEmitterAtLocation( GetWorld(), pawn->Explosion->Template, pawn->GetActorLocation(), FRotator() );
 
 		//pawn->PlaneMesh->SetVisibility( false );
 		//pawn->SetActorTickEnabled( false );
@@ -30,6 +49,10 @@ void AStarWingGameMode::Tick(float DeltaSeconds)
 
 		isDead = true;
 
+		//UGameplayStatics::OpenLevel( GetWorld(), "MainMenu" );
+
+		
+
 		//UGameplayStatics::CreateParticleSystem( pawn->Explosion->get, GetWorld(), pawn, true );
 		//auto partclSystem = CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("MyParticle"));
 		//partclSystem->AttachTo(MeshVariable, "ASocketOfYourChoosing");
@@ -37,7 +60,7 @@ void AStarWingGameMode::Tick(float DeltaSeconds)
 		//GetWorld()->findac
 		//GetWorld()->SpawnActor()
 	} else {
-		boost += DeltaSeconds;
+		boost += DeltaSeconds * BOOST_COST * 0.4f;
 		time -= DeltaSeconds;
 	}
 

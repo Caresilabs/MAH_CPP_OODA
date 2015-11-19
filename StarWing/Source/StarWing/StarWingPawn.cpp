@@ -7,6 +7,8 @@
 
 AStarWingPawn::AStarWingPawn()
 {
+	AutoPossessPlayer = EAutoReceiveInput::Player0;
+
 	// Structure to hold one-time initialization
 	struct FConstructorStatics
 	{
@@ -42,6 +44,7 @@ AStarWingPawn::AStarWingPawn()
 	Explosion = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Explosions"));
 	if ( ConstructorStatics.Explosion.Succeeded() ) {
 		Explosion->SetTemplate( ConstructorStatics.Explosion.Get() );
+		Explosion->Deactivate();
 	}
 	Explosion->AttachTo(RootComponent);
 	
@@ -51,6 +54,9 @@ AStarWingPawn::AStarWingPawn()
 	MaxSpeed = 2800.f;
 	MinSpeed = 300.f;
 	CurrentForwardSpeed = 500.f;
+
+	//AStarWingGameMode* gm = (AStarWingGameMode*)GetWorld()->GetAuthGameMode();
+	//gm->MyPawn = this;
 }
 
 void AStarWingPawn::Tick(float DeltaSeconds)
@@ -74,11 +80,11 @@ void AStarWingPawn::Tick(float DeltaSeconds)
 	// Call any parent class Tick implementation
 	Super::Tick(DeltaSeconds);
 }
-
-void AStarWingPawn::Destroyed()  {
-	Explosion->ActivateSystem();
-	Super::Destroy();
-}
+//
+//void AStarWingPawn::Destroyed()  {
+//	//Explosion->ActivateSystem();
+//	Super::Destroy();
+//}
 
 
 void AStarWingPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
@@ -186,10 +192,10 @@ void AStarWingPawn::ShootInput(){
 void AStarWingPawn::RollInput() {
 	
 	AStarWingGameMode* gm = (AStarWingGameMode*)GetWorld()->GetAuthGameMode();
-	if ( gm->boost - AStarWingGameMode::BOOST_COST * 2.f <= 0 )
+	if ( gm->boost - AStarWingGameMode::BOOST_COST <= 0 )
 		return;
 
-	gm->boost -= AStarWingGameMode::BOOST_COST * 2.f;
+	gm->boost -= AStarWingGameMode::BOOST_COST ;
 	gm->boost = FMath::Clamp( gm->boost, 0.f, 100.f );
 
 	CurrentRollSpeed = 1750 * (CurrentRightSpeed < 0 ? -1 : 1);

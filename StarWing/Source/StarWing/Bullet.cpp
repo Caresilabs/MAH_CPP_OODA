@@ -23,6 +23,9 @@ ABullet::ABullet()
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>( TEXT( "Bullet Mesh" ) );
 	StaticMesh->SetStaticMesh( ConstructorStatics.BulletMesh.Get() );
 	StaticMesh->SetRelativeScale3D(FVector(0.3f, 0.3f, 0.3f));
+
+
+	//StaticMesh->OnComponentHit.AddDynamic( this, &ABullet::OnHit );
 	StaticMesh->SetNotifyRigidBodyCollision( true );
 	StaticMesh->SetEnableGravity( false );
 
@@ -39,14 +42,16 @@ void ABullet::BeginPlay()
 // Called every frame
 void ABullet::Tick( float DeltaTime )
 {
-	Super::Tick( DeltaTime );
+	
 	AddActorLocalOffset( FVector( direction * speed * DeltaTime ) );
+
+	Super::Tick( DeltaTime );
 }
 
 void ABullet::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
-	
+
 	if ( shooter == Other )
 		return;
 
