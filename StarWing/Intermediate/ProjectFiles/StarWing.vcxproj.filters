@@ -4,7 +4,7 @@
 	<ItemGroup>
 		<None Include="..\..\StarWing.uproject" />
 		<Filter Include="Source">
-			<UniqueIdentifier>{C4BDE258-4DE5-4F07-8196-E2C885FF851A}</UniqueIdentifier>
+			<UniqueIdentifier>{660B11BB-036D-4FBD-8EC3-714ACFEF7F80}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Source\StarWing.Target.cs">
 			<Filter>Source</Filter>
@@ -13,7 +13,7 @@
 			<Filter>Source</Filter>
 		</None >
 		<Filter Include="Config">
-			<UniqueIdentifier>{D45A418F-78BB-46A4-BCE5-EB26C25EA449}</UniqueIdentifier>
+			<UniqueIdentifier>{07F2C357-9EE1-46BA-A74D-47CE1C628B87}</UniqueIdentifier>
 		</Filter>
 		<None Include="..\..\Config\DefaultEditor.ini">
 			<Filter>Config</Filter>
@@ -31,7 +31,7 @@
 			<Filter>Config</Filter>
 		</None >
 		<Filter Include="Source\StarWing">
-			<UniqueIdentifier>{3372E7D3-83A9-4338-85DC-BCF5934021CE}</UniqueIdentifier>
+			<UniqueIdentifier>{93D38A8E-E0D2-464A-8FF3-D4C8F3C7D3D1}</UniqueIdentifier>
 		</Filter>
 		<ClCompile Include="..\..\Source\StarWing\Bullet.cpp">
 			<Filter>Source\StarWing</Filter>

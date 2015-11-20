@@ -35,11 +35,14 @@ void AStarWingGameMode::Tick(float DeltaSeconds)
 		
 		//auto pawn = FoundActors[0];
 
+		GameOver();
+
+
 		auto pawn = Cast<AStarWingPawn>(UGameplayStatics::GetPlayerPawn( GetWorld(), 0 ));
 
 		//pawn->Explosion->Activate( true );
 
-		UGameplayStatics::SpawnEmitterAtLocation( GetWorld(), pawn->Explosion->Template, pawn->GetActorLocation(), FRotator() );
+		UGameplayStatics::SpawnEmitterAtLocation( GetWorld(), pawn->Explosion, pawn->GetActorLocation(), FRotator() );
 
 		//pawn->PlaneMesh->SetVisibility( false );
 		//pawn->SetActorTickEnabled( false );
@@ -48,6 +51,10 @@ void AStarWingGameMode::Tick(float DeltaSeconds)
 
 
 		isDead = true;
+
+		//UGameplayStatics::OpenLevel(GetWorld(), "")
+		//UGameplayStatics
+		
 
 		//UGameplayStatics::OpenLevel( GetWorld(), "MainMenu" );
 

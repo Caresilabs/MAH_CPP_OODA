@@ -25,8 +25,9 @@ public:
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* Camera;
 
-	UPROPERTY(Category = Particles, EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	UParticleSystemComponent* Explosion;
+	UPROPERTY( Category = Particles, EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true") )
+		//UParticleSystemComponent* Explosion;
+	UParticleSystem* Explosion;
 	
 
 	// Begin AActor overrides

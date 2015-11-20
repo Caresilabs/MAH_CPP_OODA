@@ -12,10 +12,16 @@ class AStarWingGameMode : public AGameMode
 {
 	GENERATED_BODY()
 
+
+
 public:
 	static const int START_TIME = 30;
 	static const int CRASH_TIME_PENALTY = 20;
 	static const int BOOST_COST = 20;
+
+
+	UFUNCTION( BlueprintImplementableEvent )
+	virtual void GameOver();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Score)
 	float time;

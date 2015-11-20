@@ -41,12 +41,13 @@ AStarWingPawn::AStarWingPawn()
 	Camera->bUsePawnControlRotation = false; // Don't rotate camera with controller
 
 
-	Explosion = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Explosions"));
+	//Explosion = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Explosions"));
 	if ( ConstructorStatics.Explosion.Succeeded() ) {
-		Explosion->SetTemplate( ConstructorStatics.Explosion.Get() );
-		Explosion->Deactivate();
+		//Explosion->SetTemplate( ConstructorStatics.Explosion.Get() );
+		Explosion = ConstructorStatics.Explosion.Get();
+		//Explosion->Deactivate();
 	}
-	Explosion->AttachTo(RootComponent);
+	//Explosion->AttachTo(RootComponent);
 	
 	// Set handling parameters
 	Acceleration = 800.f;

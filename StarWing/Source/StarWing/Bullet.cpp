@@ -2,6 +2,7 @@
 
 #include "StarWing.h"
 #include "Bullet.h"
+#include "StarWingPawn.h"
 
 
 // Sets default values
@@ -24,7 +25,6 @@ ABullet::ABullet()
 	StaticMesh->SetStaticMesh( ConstructorStatics.BulletMesh.Get() );
 	StaticMesh->SetRelativeScale3D(FVector(0.3f, 0.3f, 0.3f));
 
-
 	//StaticMesh->OnComponentHit.AddDynamic( this, &ABullet::OnHit );
 	StaticMesh->SetNotifyRigidBodyCollision( true );
 	StaticMesh->SetEnableGravity( false );
@@ -36,7 +36,6 @@ ABullet::ABullet()
 void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -52,7 +51,7 @@ void ABullet::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, 
 {
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
 
-	if ( shooter == Other )
+	if ( dynamic_cast<AStarWingPawn*>(Other) )
 		return;
 
 	if ( OtherComp->ComponentHasTag( TEXT( "Destroyable" ) ) ) {
