@@ -25,7 +25,7 @@ ABullet::ABullet()
 	StaticMesh->SetStaticMesh( ConstructorStatics.BulletMesh.Get() );
 	StaticMesh->SetRelativeScale3D(FVector(0.3f, 0.3f, 0.3f));
 
-	//StaticMesh->OnComponentHit.AddDynamic( this, &ABullet::OnHit );
+	StaticMesh->OnComponentBeginOverlap.AddDynamic( this, &ABullet::BeginOverlap );
 	StaticMesh->SetNotifyRigidBodyCollision( true );
 	StaticMesh->SetEnableGravity( false );
 
@@ -36,6 +36,7 @@ ABullet::ABullet()
 void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
+
 }
 
 // Called every frame
@@ -44,20 +45,30 @@ void ABullet::Tick( float DeltaTime )
 	
 	AddActorLocalOffset( FVector( direction * speed * DeltaTime ) );
 
+
 	Super::Tick( DeltaTime );
 }
 
-void ABullet::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
-{
-	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
+UFUNCTION() 
+void ABullet::BeginOverlap( class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult ) { 
 
-	if ( dynamic_cast<AStarWingPawn*>(Other) )
+	if ( Cast<AStarWingPawn>(OtherActor) )
 		return;
 
 	if ( OtherComp->ComponentHasTag( TEXT( "Destroyable" ) ) ) {
-		Other->Destroy();
+		OtherActor->Destroy();
 	}
 
-	Destroy();
-}
+	this->Destroy();
 
+}
+//void ABullet::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
+//{
+//	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
+//
+//	if ( Cast<AStarWingPawn>(Other) )
+//		return;
+//
+//	this->Destroy();
+//}
+//
