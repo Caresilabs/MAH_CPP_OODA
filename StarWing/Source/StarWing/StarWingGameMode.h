@@ -17,7 +17,7 @@ class AStarWingGameMode : public AGameMode
 public:
 	static const int START_TIME = 30;
 	static const int CRASH_TIME_PENALTY = 20;
-	static const int BOOST_COST = 20;
+	static const int BOOST_COST = 15;
 
 
 	UFUNCTION( BlueprintImplementableEvent )
@@ -32,14 +32,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float boost;
 
+	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	bool isRunning;
+
 	AStarWingGameMode();
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	AStarWingPawn* MyPawn;
-
-private:
-	bool isDead;
 };
 
 

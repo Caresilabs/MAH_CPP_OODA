@@ -26,30 +26,22 @@ ABullet::ABullet()
 	StaticMesh->SetRelativeScale3D(FVector(0.3f, 0.3f, 0.3f));
 
 	StaticMesh->OnComponentBeginOverlap.AddDynamic( this, &ABullet::BeginOverlap );
-	StaticMesh->SetNotifyRigidBodyCollision( true );
-	StaticMesh->SetEnableGravity( false );
+	StaticMesh->SetCollisionObjectType( ECollisionChannel::ECC_GameTraceChannel1 );
+
+	//StaticMesh->SetNotifyRigidBodyCollision( true );
+	//StaticMesh->SetEnableGravity( false );
 
 	RootComponent = StaticMesh;
-}
-
-// Called when the game starts or when spawned
-void ABullet::BeginPlay()
-{
-	Super::BeginPlay();
-
 }
 
 // Called every frame
 void ABullet::Tick( float DeltaTime )
 {
-	
-	AddActorLocalOffset( FVector( direction * speed * DeltaTime ) );
-
+	AddActorLocalOffset( FVector( direction * speed * DeltaTime ) , true);
 
 	Super::Tick( DeltaTime );
 }
 
-UFUNCTION() 
 void ABullet::BeginOverlap( class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult ) { 
 
 	if ( Cast<AStarWingPawn>(OtherActor) )
@@ -62,13 +54,18 @@ void ABullet::BeginOverlap( class AActor* OtherActor, class UPrimitiveComponent*
 	this->Destroy();
 
 }
-//void ABullet::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
-//{
-//	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
-//
-//	if ( Cast<AStarWingPawn>(Other) )
-//		return;
-//
-//	this->Destroy();
-//}
-//
+
+void ABullet::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
+{
+	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
+
+	if ( Cast<AStarWingPawn>(Other) )
+		return;
+
+	if ( OtherComp->ComponentHasTag( TEXT( "Destroyable" ) ) ) {
+		Other->Destroy();
+	}
+
+	this->Destroy();
+}
+

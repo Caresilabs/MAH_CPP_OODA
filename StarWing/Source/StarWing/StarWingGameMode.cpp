@@ -3,10 +3,10 @@
 #include "StarWing.h"
 #include "StarWingGameMode.h"
 
-AStarWingGameMode::AStarWingGameMode() : isDead(false)
+AStarWingGameMode::AStarWingGameMode()
 {
 	// set default pawn class to our flying pawn
-	//DefaultPawnClass = AStarWingPawn::StaticClass();
+	DefaultPawnClass = AStarWingPawn::StaticClass();
 	time = START_TIME;
 	health = 100.f;
 	boost = 100.f;
@@ -14,63 +14,28 @@ AStarWingGameMode::AStarWingGameMode() : isDead(false)
 
 void AStarWingGameMode::Tick(float DeltaSeconds)
 {
-	
 
-	if ((time <= 0 || health <= 0)) {
+	if ( isRunning ) {
 
-		if ( isDead )
-			return;
+		if ( (time <= 0 || health <= 0) ) {
 
-		
+			auto pawn = Cast<AStarWingPawn>( UGameplayStatics::GetPlayerPawn( GetWorld(), 0 ) );
 
+			UGameplayStatics::SpawnEmitterAtLocation( GetWorld(), pawn->Explosion, pawn->GetActorLocation());
 
-		//TSubclassOf<AStarWingPawn> ClassToFind;
-		//TArray<AActor*> FoundActors;
-		//UGameplayStatics::GetAllActorsOfClass( GetWorld(), ClassToFind, FoundActors );
-		
-		///if ( FoundActors.Num() == 0 )
-		//	return;
-
-		//AStarWingPawn*  pawn = Cast<AStarWingPawn>( DefaultPawnClass.GetDefaultObject() );
-		
-		//auto pawn = FoundActors[0];
-
-		GameOver();
+			pawn->Destroy();
 
 
-		auto pawn = Cast<AStarWingPawn>(UGameplayStatics::GetPlayerPawn( GetWorld(), 0 ));
+			isRunning = false;
 
-		//pawn->Explosion->Activate( true );
+			GameOver();
 
-		UGameplayStatics::SpawnEmitterAtLocation( GetWorld(), pawn->Explosion, pawn->GetActorLocation(), FRotator() );
-
-		//pawn->PlaneMesh->SetVisibility( false );
-		//pawn->SetActorTickEnabled( false );
-
-		pawn->Destroy();
-
-
-		isDead = true;
-
-		//UGameplayStatics::OpenLevel(GetWorld(), "")
-		//UGameplayStatics
-		
-
-		//UGameplayStatics::OpenLevel( GetWorld(), "MainMenu" );
-
-		
-
-		//UGameplayStatics::CreateParticleSystem( pawn->Explosion->get, GetWorld(), pawn, true );
-		//auto partclSystem = CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("MyParticle"));
-		//partclSystem->AttachTo(MeshVariable, "ASocketOfYourChoosing");
-		//->cast
-		//GetWorld()->findac
-		//GetWorld()->SpawnActor()
-	} else {
-		boost += DeltaSeconds * BOOST_COST * 0.4f;
-		time -= DeltaSeconds;
+		} else {
+			boost += DeltaSeconds * BOOST_COST * 0.4f;
+			time -= DeltaSeconds;
+		}
 	}
 
 	// Call any parent class Tick implementation
-	Super::Tick(DeltaSeconds);
+	Super::Tick( DeltaSeconds );
 }

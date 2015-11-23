@@ -56,8 +56,6 @@ AStarWingPawn::AStarWingPawn()
 	MinSpeed = 300.f;
 	CurrentForwardSpeed = 500.f;
 
-	//AStarWingGameMode* gm = (AStarWingGameMode*)GetWorld()->GetAuthGameMode();
-	//gm->MyPawn = this;
 }
 
 void AStarWingPawn::Tick(float DeltaSeconds)
@@ -66,8 +64,8 @@ void AStarWingPawn::Tick(float DeltaSeconds)
 
 	// Move plan forwards (with sweep so we stop when we collide with things)
 	AddActorLocalOffset(LocalMove, true);
-	//Movement->AddInputVector(LocalMove);
-	AddActorWorldOffset(FVector(0, CurrentRightSpeed * DeltaSeconds, CurrentUpSpeed * DeltaSeconds));
+
+	AddActorWorldOffset(FVector(0, CurrentRightSpeed * DeltaSeconds, CurrentUpSpeed * DeltaSeconds), true);
 
 	// Calculate change in rotation this frame
 	FRotator DeltaRotation(0,0,0);
@@ -81,18 +79,13 @@ void AStarWingPawn::Tick(float DeltaSeconds)
 	// Call any parent class Tick implementation
 	Super::Tick(DeltaSeconds);
 }
-//
-//void AStarWingPawn::Destroyed()  {
-//	//Explosion->ActivateSystem();
-//	Super::Destroy();
-//}
 
 
 void AStarWingPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, class UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
 
-	if ( dynamic_cast<ABullet*>(Other) != nullptr )
+	if ( Cast<ABullet>(Other) != nullptr )
 		return;
 	
 	if (OtherComp->ComponentHasTag(TEXT("Destroyable"))) {
@@ -102,9 +95,12 @@ void AStarWingPawn::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* O
 		CurrentUpSpeed = 0.f;
 		Other->Destroy();
 	} else {
-		CurrentUpSpeed = MaxSpeed / 4.f;
-		CurrentForwardSpeed *= -1.f;
-		CurrentRightSpeed *= -1.f;
+		//CurrentUpSpeed = MaxSpeed / 4.f;
+		///CurrentForwardSpeed *= -1.f;
+		//CurrentRightSpeed *= -1.f;
+		CurrentForwardSpeed = HitNormal.X * 1500.f;
+		CurrentRightSpeed = HitNormal.Y * 1500.f;
+		CurrentUpSpeed = HitNormal.Z * 1500.f;
 	}
 
 	AStarWingGameMode* gm = (AStarWingGameMode*)GetWorld()->GetAuthGameMode();
@@ -186,14 +182,14 @@ void AStarWingPawn::ShootInput(){
 	ABullet* bullet = Cast<ABullet>(GetWorld()->SpawnActor( ABullet::StaticClass(), &pos, &rot ));
 	bullet->SetShooter( this );
 	bullet->SetDirection( GetActorForwardVector() );
-	bullet->SetSpeed( CurrentForwardSpeed*11.0f );
+	bullet->SetSpeed( CurrentForwardSpeed*9.0f );
 }
 
 
 void AStarWingPawn::RollInput() {
 	
 	AStarWingGameMode* gm = (AStarWingGameMode*)GetWorld()->GetAuthGameMode();
-	if ( gm->boost - AStarWingGameMode::BOOST_COST <= 0 )
+	if ( gm->boost - AStarWingGameMode::BOOST_COST /2.0f <= 0 )
 		return;
 
 	gm->boost -= AStarWingGameMode::BOOST_COST ;
