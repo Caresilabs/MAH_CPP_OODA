@@ -36,6 +36,10 @@ Inserts a piece on the board.
 @return if the move was valid
 */
 bool Controller::makeMove(int player, int x) {
+
+	if (board == nullptr) {
+		int i = 1;
+	}
 	Board::State state = board->insert(player, x);
 
 	switch (state)
@@ -54,7 +58,8 @@ bool Controller::makeMove(int player, int x) {
 		break;
 	}
 
-	boardUpdateCallback->onBoardUpdate();
+	if (state != Board::Invalid) 
+		boardUpdateCallback->onBoardUpdate();
 
 	if (state == Board::Invalid) {
 		return false;

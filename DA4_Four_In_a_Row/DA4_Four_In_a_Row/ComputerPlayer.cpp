@@ -1,6 +1,8 @@
 #include "ComputerPlayer.h"
 #include <cstdlib>
 #include <ctime>
+#include <thread>
+#include <chrono>
 
 using namespace Core;
 
@@ -24,6 +26,7 @@ void ComputerPlayer::doAI() {
 		doAI();
 	}
 	else {
+	//	std::this_thread::sleep_for(std::chrono::milliseconds(1000000));
 		int y = 0;
 		for (; y < boardHeight; y++)
 		{
@@ -38,6 +41,11 @@ void ComputerPlayer::doAI() {
 }
 
 void ComputerPlayer::recieve(int position)  {
+	if (position < 0 || position >= boardWidth) {
+		doAI();
+		return;
+	}
+
 	int y = 0;
 	for (; y < boardHeight; y++)
 	{
