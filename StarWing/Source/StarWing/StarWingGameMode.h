@@ -15,7 +15,7 @@ class AStarWingGameMode : public AGameMode
 
 
 public:
-	static const int START_TIME = 30;
+	static const int START_TIME = 15;
 	static const int CRASH_TIME_PENALTY = 20;
 	static const int BOOST_COST = 15;
 
