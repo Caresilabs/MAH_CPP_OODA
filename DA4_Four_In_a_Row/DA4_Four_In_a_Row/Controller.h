@@ -4,7 +4,6 @@
 #include "Settings.h"
 #include "IBoardUpdateCallback.h"
 
-namespace Core {
 	class PlayerManager;
 
 	/*
@@ -41,8 +40,7 @@ namespace Core {
 	private:
 		Board* board;
 		PlayerManager* playerManager;
-		Core::IBoardUpdateCallback* boardUpdateCallback;
+		IBoardUpdateCallback* boardUpdateCallback;
 		State state;
 	};
-}
 

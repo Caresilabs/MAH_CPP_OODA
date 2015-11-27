@@ -5,7 +5,7 @@
 #include "RemotePlayer.h"
 #include <iostream>
 
-using namespace Core;
+
 
 PlayerManager::PlayerManager(Controller* controller, const Settings& settings) : controller(controller) {
 	switch (settings.gameType)
@@ -16,7 +16,6 @@ PlayerManager::PlayerManager(Controller* controller, const Settings& settings) :
 		break;
 	case Settings::GameType::PlayerVSComputer:
 		playerA = new LocalPlayer(this, settings.playerNameA);
-		//playerA = new ComputerPlayer(this, settings.playerNameB, settings.gridWidth, settings.gridHeight);
 		playerB = new ComputerPlayer(this, settings.playerNameB, settings.gridWidth, settings.gridHeight);
 		break;
 	case Settings::GameType::PlayerVSRemote:

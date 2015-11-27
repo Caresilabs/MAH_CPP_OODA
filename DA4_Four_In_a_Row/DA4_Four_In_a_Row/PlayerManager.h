@@ -3,7 +3,6 @@
 #include "Settings.h"
 #include "Controller.h"
 
-namespace Core {
 	class Player;
 
 	/*
@@ -37,5 +36,4 @@ namespace Core {
 		void notifyOther(int position);
 
 	};
-}
 

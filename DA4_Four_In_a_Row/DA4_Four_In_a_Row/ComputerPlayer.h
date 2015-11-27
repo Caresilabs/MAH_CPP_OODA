@@ -1,6 +1,5 @@
 #pragma once
 #include "Player.h"
-namespace Core {
 	/*
 	Simulates a real player using artificial intelligence.
 	*/
@@ -20,5 +19,4 @@ namespace Core {
 		int calculateBestMove();
 		void doAI();
 	};
-}
 

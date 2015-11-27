@@ -1,9 +1,9 @@
 #include "Controller.h"
 #include "PlayerManager.h"
 
-using namespace Core;
 
-Controller::Controller(Core::IBoardUpdateCallback* callback) : boardUpdateCallback(callback){
+
+Controller::Controller(IBoardUpdateCallback* callback) : boardUpdateCallback(callback){
 }
 
 void Controller::setupNewGame(Settings settings) {
@@ -21,6 +21,8 @@ void Controller::restartGame() {
 	delete board;
 
 	// TODO
+	boardUpdateCallback->onBoardUpdate();
+
 	setupNewGame(Settings());
 }
 
@@ -44,15 +46,15 @@ bool Controller::makeMove(int player, int x) {
 
 	switch (state)
 	{
-	case Core::Board::Full:
+	case Board::Full:
 		this->state = State::GameOver;
 		break;
-	case Core::Board::Invalid:
+	case Board::Invalid:
 		break;
-	case Core::Board::Win:
+	case Board::Win:
 		this->state = State::GameOver;
 		break;
-	case Core::Board::Valid:
+	case Board::Valid:
 		break;
 	default:
 		break;

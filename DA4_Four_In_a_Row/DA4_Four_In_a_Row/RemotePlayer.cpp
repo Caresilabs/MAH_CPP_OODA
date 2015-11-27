@@ -1,9 +1,16 @@
 #include "RemotePlayer.h"
+#include "NetworkException.h"
+#include <iostream>
 
-using namespace Core;
 
 void RemotePlayer::sendToConnection(int position) {
-
+	try
+	{
+		throw NetworkException();
+	}
+	catch (NetworkException e) {
+		std::cout << e.error;
+	}
 }
 
 void RemotePlayer::recieveFromConnection(int position){

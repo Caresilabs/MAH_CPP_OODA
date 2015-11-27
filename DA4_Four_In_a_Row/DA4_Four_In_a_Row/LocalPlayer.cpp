@@ -1,7 +1,7 @@
 #include "LocalPlayer.h"
 #include <iostream>
 
-using namespace Core;
+
 
 void LocalPlayer::readMouse() {
 	int pos;

@@ -3,7 +3,6 @@
 
 #include "PlayerManager.h"
 
-namespace Core {
 	/*
 	An abstract class for recieving and sending moves to the game.
 	*/
@@ -36,5 +35,4 @@ namespace Core {
 		PlayerManager* manager;
 		std::string name;
 	};
-}
 

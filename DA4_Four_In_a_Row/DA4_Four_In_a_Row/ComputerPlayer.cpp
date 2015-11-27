@@ -4,7 +4,7 @@
 #include <thread>
 #include <chrono>
 
-using namespace Core;
+
 
 ComputerPlayer::ComputerPlayer(PlayerManager* manager, std::string name, int boardWidth, int boardHeight) : Player(manager, name), boardWidth(boardWidth), boardHeight(boardHeight) { 
 	grid = new int*[boardWidth];

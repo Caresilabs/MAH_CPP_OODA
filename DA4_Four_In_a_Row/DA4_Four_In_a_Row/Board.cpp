@@ -1,6 +1,6 @@
 #include "Board.h"
 
-using namespace Core;
+
 
 Board::Board(int width, int height, int rowsToWin) : width(width), height(height),rowsToWin(rowsToWin) {
 	grid = new int*[width];

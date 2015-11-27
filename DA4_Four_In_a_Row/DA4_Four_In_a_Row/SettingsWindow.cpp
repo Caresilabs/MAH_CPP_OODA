@@ -1,14 +1,14 @@
 #include "SettingsWindow.h"
+#include <iostream>
 
 
-using namespace GUI;
 
-Core::Settings SettingsWindow::show() {
+Settings SettingsWindow::show() {
 	return generateSettingsFromUI();
 }
 
-Core::Settings SettingsWindow::generateSettingsFromUI() {
-	Core::Settings settings;
+Settings SettingsWindow::generateSettingsFromUI() {
+	Settings settings;
 	settings.gridHeight = 10;
 	settings.gridWidth = 10;
 
@@ -18,7 +18,28 @@ Core::Settings SettingsWindow::generateSettingsFromUI() {
 	settings.playerNameA = "PlayerA";
 	settings.playerNameB = "PlayerB";
 
-	settings.gameType = Core::Settings::GameType::PlayerVSComputer;
+	std::cout << "Choose mode:\n1.PvP\n2.PvC\n3.PvR\n";
+
+	int option;
+	
+	std::cin >> option;
+		
+	switch (option)
+	{
+	case 1:
+		settings.gameType = Settings::GameType::PlayerVSPlayer;
+		break;
+	case 2:
+		settings.gameType = Settings::GameType::PlayerVSComputer;
+		break;
+	case 3:
+		settings.gameType = Settings::GameType::PlayerVSComputer;
+		break;
+	default:
+		settings.gameType = Settings::GameType::PlayerVSRemote;
+		break;
+	}
+
 
 	return settings;
 }

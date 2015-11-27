@@ -1,6 +1,5 @@
 #pragma once
 
-namespace Core {
 	/*
 	Board is responsible for setting a piece in a valid position, and also checks if the board is full or a player has won.
 	*/
@@ -39,5 +38,4 @@ namespace Core {
 
 		bool checkFull();
 	};
-}
 

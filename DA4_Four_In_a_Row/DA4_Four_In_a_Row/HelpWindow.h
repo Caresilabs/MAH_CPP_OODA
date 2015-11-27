@@ -2,7 +2,6 @@
 
 #include <string>
 
-namespace GUI {
 
 	/*
 	Displays a local html-page describing the game rules.
@@ -15,5 +14,4 @@ namespace GUI {
 		void showHTML();
 		const static std::string path;
 	};
-}
 

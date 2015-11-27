@@ -101,5 +101,8 @@
     <ClInclude Include="IBoardUpdateCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

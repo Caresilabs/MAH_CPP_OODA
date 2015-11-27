@@ -2,7 +2,7 @@
 #include "MainWindow.h"
 
 void main() {
-	GUI::MainWindow mainWindow;
+	MainWindow mainWindow;
 
 	return;
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include "Player.h"
 
-namespace Core {
 	/*
 	Sending and recieving input from a remote input source.
 	*/
@@ -18,5 +17,4 @@ namespace Core {
 		void sendToConnection(int position);
 		void recieveFromConnection(int position);
 	};
-}
 

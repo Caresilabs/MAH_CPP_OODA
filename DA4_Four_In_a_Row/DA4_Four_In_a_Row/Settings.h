@@ -2,7 +2,6 @@
 
 #include <string>
 
-namespace Core {
 	/*
 	Settings is a datacontainer for setting up a game.
 	*/
@@ -34,5 +33,4 @@ namespace Core {
 
 
 	};
-}
 

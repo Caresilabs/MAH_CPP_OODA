@@ -2,8 +2,6 @@
 
 #include <string>
 
-namespace GUI {
-
 	/*
 	Displays an about window showing the creator and version.
 	*/
@@ -18,4 +16,3 @@ namespace GUI {
 		std::string creator;
 		std::string dateOfCreation;
 	};
-}

@@ -2,7 +2,6 @@
 
 #include "Player.h"
 
-namespace Core {
 	/*
 	Sending and receiving moves from local input source.
 	*/
@@ -16,4 +15,3 @@ namespace Core {
 		void readMouse();
 
 	};
-}

@@ -2,9 +2,9 @@
 #include "Board.h"
 #include <iostream>
 
-using namespace GUI;
 
-void BoardPanel::draw(const Core::Board* board) {
+
+void BoardPanel::draw(const Board* board) {
 	system("cls");
 	for (int i = 0; i < board->getWidth(); i++)
 	{

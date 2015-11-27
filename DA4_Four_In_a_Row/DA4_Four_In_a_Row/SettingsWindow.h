@@ -2,7 +2,6 @@
 
 #include "Settings.h"
 
-namespace GUI {
 	
 	/*
 	Generating a Settings object containing the game data the user specified.
@@ -10,9 +9,8 @@ namespace GUI {
 	class SettingsWindow {
 	public:
 		SettingsWindow() = default;
-		Core::Settings show();
+		Settings show();
 	private:
-		Core::Settings generateSettingsFromUI();
+		Settings generateSettingsFromUI();
 	};
-}
 

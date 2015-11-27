@@ -89,6 +89,7 @@
     <ClInclude Include="IBoardUpdateCallback.h" />
     <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="NetworkException.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="RemotePlayer.h" />

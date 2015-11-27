@@ -1,10 +1,10 @@
 #include "MainWindow.h"
 #include <iostream>
 
-using namespace GUI;
+
 
 MainWindow::MainWindow() {
-	controller = new Core::Controller(dynamic_cast<Core::IBoardUpdateCallback*>(this));
+	controller = new Controller(dynamic_cast<IBoardUpdateCallback*>(this));
 	showMenu();
 }
 
@@ -18,7 +18,7 @@ void MainWindow::showMenu() {
 	{
 	case 1:
 	{
-		Core::Settings settings = showSettings();
+		Settings settings = showSettings();
 		
 		controller->setupNewGame(settings);
 		
@@ -30,10 +30,10 @@ void MainWindow::showMenu() {
 		// Clean up
 		controller->exitGame();
 		
-		//	while (state == Core::Controller::State::Playing) {
+		//	while (state == Controller::State::Playing) {
 			
 		//}
-		//if (state == Core::Controller::State::GameOver) {
+		//if (state == Controller::State::GameOver) {
 
 		//}
 		break;
@@ -58,12 +58,16 @@ void MainWindow::showMenu() {
 void MainWindow::onBoardUpdate() {
 	boardPanel.draw(controller->getBoard());
 
-	Core::Controller::State state = controller->getState();
-	if (state == Core::Controller::State::GameOver) {
+	Controller::State state = controller->getState();
+	if (state == Controller::State::GameOver) {
 		
 		//system("cls");
-		std::cout << "Game Over!\n";
-		system("PAUSE");
+		std::cout << "Game Over!\n\n1. Restart\n2. Main menu\n";
+		int option;
+		std::cin >> option;
+		if (option == 1) {
+			controller->restartGame();
+		}
 	}
 }
 
@@ -75,7 +79,7 @@ void MainWindow::showAbout(){
 	about.show();
 }
 
-Core::Settings MainWindow::showSettings(){
+Settings MainWindow::showSettings(){
 	return settings.show();
 }
 
