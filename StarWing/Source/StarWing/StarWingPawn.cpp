@@ -64,7 +64,6 @@ void AStarWingPawn::Tick(float DeltaSeconds)
 
 	// Move plan forwards (with sweep so we stop when we collide with things)
 	AddActorLocalOffset(LocalMove, true);
-
 	AddActorWorldOffset(FVector(0, CurrentRightSpeed * DeltaSeconds, CurrentUpSpeed * DeltaSeconds), true);
 
 	// Calculate change in rotation this frame
