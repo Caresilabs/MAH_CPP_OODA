@@ -45,7 +45,7 @@ void MainWindow::showMenu() {
 		showAbout();
 		break;
 	case 0:
-		exit(0);
+		exitProcess();
 		break;
 	default:
 		break;
@@ -69,6 +69,9 @@ void MainWindow::onBoardUpdate() {
 			controller->restartGame();
 		}
 	}
+	if (state == Controller::State::Exit) {
+
+	}
 }
 
 void MainWindow::showHelp(){
@@ -88,6 +91,10 @@ void MainWindow::restartGame(){
 }
 
 void MainWindow::getMenuClick(){
+}
+
+void MainWindow::exitProcess() {
+	exit(0);
 }
 
 MainWindow::~MainWindow() {

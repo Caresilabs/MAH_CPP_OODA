@@ -14,7 +14,14 @@
 		char* serverConnection;
 		char* clientConnection;
 
+		/*
+		@param position to send
+		*/
 		void sendToConnection(int position);
+
+		/*
+		@param position to recieve
+		*/
 		void recieveFromConnection(int position);
 	};
 

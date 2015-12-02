@@ -18,10 +18,24 @@
 
 		Controller(IBoardUpdateCallback* callback);
 
+		/*
+		Init a new game from settings. Make sure to call startGame() after.
+		*/
 		void setupNewGame(Settings settings);
+
+		/*
+		Start the actual game.
+		*/
 		void startGame();
 
+		/*
+		Restart current session.
+		*/
 		void restartGame();
+
+		/*
+		Exit the current game
+		*/
 		void exitGame();
 
 		/*

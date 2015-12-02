@@ -8,8 +8,16 @@
 	class AboutWindow {
 	public:
 		AboutWindow() = default;
+
+		/*
+		Show window.
+		*/
 		void show();
 	private:
+
+		/*
+		Closes the current window. If it's in show state.
+		*/
 		void close();
 
 		std::string version;

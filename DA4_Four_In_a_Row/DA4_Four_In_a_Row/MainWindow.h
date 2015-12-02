@@ -21,6 +21,7 @@
 		void showMenu();
 		void showHelp();
 		void showAbout();
+		void exitProcess();
 
 		Settings showSettings();
 		void restartGame();

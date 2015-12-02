@@ -29,6 +29,7 @@ void Controller::restartGame() {
 void Controller::exitGame() {
 	state = Exit;
 	delete playerManager;
+	delete board;
 }
 
 /*

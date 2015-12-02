@@ -16,7 +16,15 @@
 		int boardWidth;
 		int boardHeight;
 
+		/*
+		Calculate the best move for the AI
+		@return position of the best move.
+		*/
 		int calculateBestMove();
+
+		/*
+		Run the AI simulation.
+		*/
 		void doAI();
 	};
 

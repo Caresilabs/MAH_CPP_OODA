@@ -12,6 +12,9 @@
 
 		virtual void recieve(int position) override;
 	private:
+		/*
+		Read the computers mouse state.
+		*/
 		void readMouse();
 
 	};

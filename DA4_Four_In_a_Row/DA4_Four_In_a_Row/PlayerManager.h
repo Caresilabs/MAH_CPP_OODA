@@ -12,6 +12,9 @@
 	public:
 		PlayerManager(Controller* controller, const Settings& settings);
 
+		/*
+		Start the playermanager
+		*/
 		void start();
 
 		/*
