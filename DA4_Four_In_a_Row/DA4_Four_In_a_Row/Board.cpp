@@ -2,7 +2,7 @@
 
 
 
-Board::Board(int width, int height, int rowsToWin) : width(width), height(height),rowsToWin(rowsToWin) {
+Board::Board(int width, int height, int rowsToWin) : width(width), height(height), rowsToWin(rowsToWin) {
 	grid = new int*[width];
 	for (int i = 0; i < width; i++)
 	{
@@ -41,7 +41,7 @@ Board::State Board::insert(int playerId, int x){
 }
 
 int Board::findCount(int player, int x, int y, int dirX, int dirY) {
-		
+
 	int count = 0;
 
 	while (true) {
@@ -64,10 +64,10 @@ int Board::findCount(int player, int x, int y, int dirX, int dirY) {
 }
 
 bool Board::checkWin(int player, int x, int y) {
-	if (findCount(player, x, y, -1, 0) + findCount(player, x, y, 1, 0) -1 >= rowsToWin) return true;
-	if (findCount(player, x, y, 0, -1) + findCount(player, x, y, 0, 1) -1 >= rowsToWin) return true;
-	if (findCount(player, x, y, -1, -1) + findCount(player, x, y, 1, 1) -1 >= rowsToWin) return true;
-	if (findCount(player, x, y, -1, 1) + findCount(player, x, y, 1, -1) -1 >= rowsToWin) return true;
+	if (findCount(player, x, y, -1, 0) + findCount(player, x, y, 1, 0) - 1 >= rowsToWin) return true;
+	if (findCount(player, x, y, 0, -1) + findCount(player, x, y, 0, 1) - 1 >= rowsToWin) return true;
+	if (findCount(player, x, y, -1, -1) + findCount(player, x, y, 1, 1) - 1 >= rowsToWin) return true;
+	if (findCount(player, x, y, -1, 1) + findCount(player, x, y, 1, -1) - 1 >= rowsToWin) return true;
 
 	return false;
 }
@@ -82,6 +82,18 @@ bool Board::checkFull(){
 		}
 	}
 	return true;
+}
+
+int Board::getWidth() const {
+	return width;
+}
+
+int Board::getHeight() const {
+	return height;
+}
+
+int** Board::getGrid() const {
+	return grid;
 }
 
 Board::~Board() {

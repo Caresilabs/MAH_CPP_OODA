@@ -1,9 +1,7 @@
 #include "MainWindow.h"
 #include <iostream>
 
-
-
-MainWindow::MainWindow() {
+MainWindow::MainWindow() : help(new HelpWindow), about(new AboutWindow), settings(new SettingsWindow) {
 	controller = new Controller(dynamic_cast<IBoardUpdateCallback*>(this));
 	showMenu();
 }
@@ -56,7 +54,7 @@ void MainWindow::showMenu() {
 }
 
 void MainWindow::onBoardUpdate() {
-	boardPanel.draw(controller->getBoard());
+	boardPanel->draw(controller->getBoard());
 
 	Controller::State state = controller->getState();
 	if (state == Controller::State::GameOver) {
@@ -75,15 +73,15 @@ void MainWindow::onBoardUpdate() {
 }
 
 void MainWindow::showHelp(){
-	help.show();
+	help->show();
 }
 
 void MainWindow::showAbout(){
-	about.show();
+	about->show();
 }
 
 Settings MainWindow::showSettings(){
-	return settings.show();
+	return settings->show();
 }
 
 void MainWindow::restartGame(){
@@ -99,4 +97,7 @@ void MainWindow::exitProcess() {
 
 MainWindow::~MainWindow() {
 	delete controller;
+	delete help;
+	delete about;
+	delete settings;
 }

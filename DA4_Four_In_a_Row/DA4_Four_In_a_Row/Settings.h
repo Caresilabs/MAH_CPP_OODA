@@ -31,6 +31,5 @@
 		short port;
 		bool isHost;
 
-
 	};
 

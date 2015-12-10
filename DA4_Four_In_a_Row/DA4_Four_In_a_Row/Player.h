@@ -10,10 +10,8 @@
 	public:
 		Player(PlayerManager* manager, std::string name);
 
-		/* Deletes the copy constructor */
+		/* Disable copy constructor and assignment operator*/
 		Player(const Player& rhs) = delete;
-
-		/* Deletes the assignment operator */
 		Player& operator=(const Player& rhs) = delete;
 
 		/*
@@ -29,7 +27,10 @@
 		*/
 		virtual void recieve(int position) = 0;
 
-		std::string getName() const { return name; };
+		/*
+		@return get the player's name
+		*/
+		std::string getName() const;
 
 	protected:
 		PlayerManager* manager;

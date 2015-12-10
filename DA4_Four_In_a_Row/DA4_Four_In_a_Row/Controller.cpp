@@ -1,7 +1,6 @@
 #include "Controller.h"
 #include "PlayerManager.h"
-
-
+#include "Board.h"
 
 Controller::Controller(IBoardUpdateCallback* callback) : boardUpdateCallback(callback){
 }
@@ -61,7 +60,7 @@ bool Controller::makeMove(int player, int x) {
 		break;
 	}
 
-	if (state != Board::Invalid) 
+	if (state != Board::Invalid)
 		boardUpdateCallback->onBoardUpdate();
 
 	if (state == Board::Invalid) {
@@ -69,6 +68,14 @@ bool Controller::makeMove(int player, int x) {
 	}
 
 	return true;
+}
+
+const Board* Controller::getBoard() const {
+	return board;
+}
+
+const Controller::State Controller::getState() const {
+	return state;
 }
 
 Controller::~Controller() {

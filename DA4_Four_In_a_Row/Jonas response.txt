@@ -1,0 +1,20 @@
+1. Klass diagram
+	Vi har ändrat till pekare (Med undantag för strings, structs och enums)
+	Vårt exception ...
+	Vi hade namespace vilket vi tog bort för att lösa Together soft stöd. Tack för att vi inte
+	behöver lägga tillbaka dem igen.
+	Javadocs har laggt till på samtliga klasser.
+	
+2. Sekvensdiagram
+	Hoppas det updaterade filerna är till hjälp
+	
+3. Kod
+	Igen pekare har ändrats. Se #1. En fråga är varför använda Heap till alla objekt?
+	Stacken är betydligt fortare och måste utnyttjas när man skriver real-time applikationer. Att konstant
+	göra malloc i spelloopen sänker ens applikation. Där man inte använder pekare kan man skicka en const ref
+	vilket löser slicing problemet och skriva copy och assign funktionerna.
+	Rätta mig om jag har fel, men från ett tekniskt perpektiv känns det fel att enforca malloc på samtliga objekt.
+	
+	header filerna har nu ingen implementation. Tidigare hade vi getters och setters i headern för automatisk inline
+	men har fixat till det.
+	

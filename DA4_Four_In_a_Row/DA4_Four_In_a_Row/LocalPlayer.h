@@ -7,8 +7,11 @@
 	*/
 	class LocalPlayer : public Player {
 	public:
-		LocalPlayer(PlayerManager* manager, std::string name) : Player(manager, name) { 
-		}
+		LocalPlayer(PlayerManager* manager, std::string name);
+
+		/* Disable copy constructor and assignment operator*/
+		LocalPlayer(const LocalPlayer& rhs) = delete;
+		LocalPlayer& operator=(const LocalPlayer& rhs) = delete;
 
 		virtual void recieve(int position) override;
 	private:

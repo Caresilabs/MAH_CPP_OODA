@@ -12,6 +12,10 @@
 	public:
 		PlayerManager(Controller* controller, const Settings& settings);
 
+		/* Disable copy constructor and assignment operator*/
+		PlayerManager(const PlayerManager& rhs) = delete;
+		PlayerManager& operator=(const PlayerManager& rhs) = delete;
+
 		/*
 		Start the playermanager
 		*/
@@ -35,7 +39,14 @@
 
 		Player* currentTurn;
 
+		/*
+		Switch the current player
+		*/
 		void switchPlayer();
+
+		/*
+		@param position the position to notify the other user
+		*/
 		void notifyOther(int position);
 
 	};

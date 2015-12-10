@@ -9,6 +9,10 @@
 	public:
 		AboutWindow() = default;
 
+		/* Disable copy constructor and assignment operator*/
+		AboutWindow(const AboutWindow& rhs) = delete;
+		AboutWindow& operator=(const AboutWindow& rhs) = delete;
+
 		/*
 		Show window.
 		*/
@@ -20,6 +24,7 @@
 		*/
 		void close();
 
+		/* About data */
 		std::string version;
 		std::string creator;
 		std::string dateOfCreation;

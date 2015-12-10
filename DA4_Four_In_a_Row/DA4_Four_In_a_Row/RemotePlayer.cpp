@@ -2,14 +2,17 @@
 #include "NetworkException.h"
 #include <iostream>
 
+RemotePlayer::RemotePlayer(PlayerManager* manager, std::string name) : Player(manager, name) {
+}
 
 void RemotePlayer::sendToConnection(int position) {
 	try
 	{
-		throw NetworkException();
+		throw new NetworkException();
 	}
-	catch (NetworkException e) {
-		std::cout << e.error;
+	catch (NetworkException* e) {
+		std::cout << e->error;
+		delete e;
 	}
 }
 

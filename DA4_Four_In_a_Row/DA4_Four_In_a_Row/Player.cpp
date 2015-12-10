@@ -8,3 +8,7 @@ Player::Player(PlayerManager* manager, std::string name) : manager(manager), nam
 bool Player::send(int position) {
 	return manager->sendInput(this, position);
 }
+
+std::string Player::getName() const { 
+	return name;
+};

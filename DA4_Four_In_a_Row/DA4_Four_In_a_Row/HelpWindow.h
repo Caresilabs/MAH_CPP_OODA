@@ -10,6 +10,10 @@
 	public:
 		HelpWindow() = default;
 
+		/* Disable copy constructor and assignment operator*/
+		HelpWindow(const HelpWindow& rhs) = delete;
+		HelpWindow& operator=(const HelpWindow& rhs) = delete;
+
 		/*
 		Show window.
 		*/
