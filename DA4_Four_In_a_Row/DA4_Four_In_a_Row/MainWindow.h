@@ -49,6 +49,11 @@
 		Settings showSettings();
 
 		/*
+		Setup the current game
+		*/
+		void MainWindow::startGame();
+
+		/*
 		Restart the current game. If any.
 		*/
 		void restartGame();

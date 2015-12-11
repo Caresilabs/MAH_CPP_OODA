@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "NetworkException.h"
 
 /*
 Sending and recieving input from a remote input source.

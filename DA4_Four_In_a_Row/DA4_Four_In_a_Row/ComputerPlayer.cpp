@@ -27,17 +27,21 @@ void ComputerPlayer::doAI() {
 	}
 	else {
 	//	std::this_thread::sleep_for(std::chrono::milliseconds(1000000));
-		int y = 0;
-		for (; y < boardHeight; y++)
-		{
-			if (grid[bestMove][y] != 0) {
-				break;
-			}
-		}
-		--y;
-
-		grid[bestMove][y] = 1;
+		addPieceToAIGrid(x);
 	}
+}
+
+void ComputerPlayer::addPieceToAIGrid(int x) {
+	int y = 0;
+	for (; y < boardHeight; y++)
+	{
+		if (grid[bestMove][y] != 0) {
+			break;
+		}
+	}
+	--y;
+
+	grid[bestMove][y] = 1;
 }
 
 void ComputerPlayer::recieve(int position)  {

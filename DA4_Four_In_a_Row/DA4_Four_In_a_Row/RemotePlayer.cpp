@@ -1,5 +1,4 @@
 #include "RemotePlayer.h"
-#include "NetworkException.h"
 #include <iostream>
 
 RemotePlayer::RemotePlayer(PlayerManager* manager, std::string name) : Player(manager, name) {

@@ -31,6 +31,12 @@ private:
 	int calculateBestMove();
 
 	/*
+	add the my piece to position x. Y is calculated
+	@param x x position to add
+	*/
+	void ComputerPlayer::addPieceToAIGrid(int x);
+
+	/*
 	Run the AI simulation.
 	*/
 	void doAI();

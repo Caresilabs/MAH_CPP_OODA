@@ -16,10 +16,9 @@ void MainWindow::showMenu() {
 	{
 	case 1:
 	{
-		Settings settings = showSettings();
 		
-		controller->setupNewGame(settings);
-		
+		startGame();
+
 		// Draw initial board
 		onBoardUpdate();
 
@@ -70,6 +69,12 @@ void MainWindow::onBoardUpdate() {
 	if (state == Controller::State::Exit) {
 
 	}
+}
+
+void MainWindow::startGame() {
+	Settings settings = showSettings();
+
+	controller->setupNewGame(settings);
 }
 
 void MainWindow::showHelp(){
