@@ -1,7 +1,6 @@
 #include "Player.h"
 
 
-
 Player::Player(PlayerManager* manager, std::string name) : manager(manager), name(name) {
 }
 

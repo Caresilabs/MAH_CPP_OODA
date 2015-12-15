@@ -16,7 +16,7 @@ PlayerManager::PlayerManager(Controller* controller, const Settings& settings) :
 		break;
 	case Settings::GameType::PlayerVSComputer:
 		playerA = new LocalPlayer(this, settings.playerNameA);
-		playerB = new ComputerPlayer(this, settings.playerNameB, settings.gridWidth, settings.gridHeight);
+		playerB = new ComputerPlayer(this, settings.playerNameB, controller->getBoard());
 		break;
 	case Settings::GameType::PlayerVSRemote:
 		playerA = new LocalPlayer(this, settings.playerNameA);
@@ -33,13 +33,14 @@ PlayerManager::PlayerManager(Controller* controller, const Settings& settings) :
 
 void PlayerManager::start() {
 	std::cout << currentTurn->getName() << ": ";
-	currentTurn->recieve(-1);
+	currentTurn->notify( -1 );
 }
 
 bool PlayerManager::sendInput(Player* player, int position)
 {
 	bool valid = controller->makeMove(player == playerA ? 1 : 2, position);
 
+	// If we're not playing anymore, return true and dont switch players
 	if (controller->getState() != Controller::State::Playing) {
 		return true;
 	}
@@ -60,7 +61,7 @@ void PlayerManager::switchPlayer(){
 }
 
 void PlayerManager::notifyOther(int position){
-	currentTurn->recieve(position);
+	currentTurn->notify( position );
 }
 
 PlayerManager::~PlayerManager() {

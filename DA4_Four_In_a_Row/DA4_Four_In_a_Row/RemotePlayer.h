@@ -13,7 +13,7 @@ public:
 	RemotePlayer(const RemotePlayer& rhs) = delete;
 	RemotePlayer& operator=(const RemotePlayer& rhs) = delete;
 
-	virtual void recieve(int position) override;
+	virtual void notify( int position ) override;
 private:
 
 	char* serverConnection;

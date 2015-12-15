@@ -19,7 +19,7 @@ void RemotePlayer::recieveFromConnection(int position){
 	send(position);
 }
 
-void RemotePlayer::recieve(int position) {
+void RemotePlayer::notify( int position ) {
 	// mock
 	if (send(1)) {
 		sendToConnection(1);

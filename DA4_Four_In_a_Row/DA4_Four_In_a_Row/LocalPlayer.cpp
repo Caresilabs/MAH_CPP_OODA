@@ -12,6 +12,6 @@ void LocalPlayer::readMouse() {
 	}
 }
 
-void LocalPlayer::recieve(int position)  {
+void LocalPlayer::notify(int position)  {
 	readMouse();
 }

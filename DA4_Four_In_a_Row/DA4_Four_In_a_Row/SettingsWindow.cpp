@@ -9,6 +9,7 @@ Settings SettingsWindow::show() {
 
 Settings SettingsWindow::generateSettingsFromUI() {
 	Settings settings;
+
 	settings.gridHeight = 10;
 	settings.gridWidth = 10;
 
@@ -39,7 +40,6 @@ Settings SettingsWindow::generateSettingsFromUI() {
 		settings.gameType = Settings::GameType::PlayerVSRemote;
 		break;
 	}
-
 
 	return settings;
 }

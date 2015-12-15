@@ -2,11 +2,12 @@
 #include <iostream>
 
 MainWindow::MainWindow() : help(new HelpWindow), about(new AboutWindow), settings(new SettingsWindow) {
-	controller = new Controller(dynamic_cast<IBoardUpdateCallback*>(this));
+	controller = new Controller(static_cast<IBoardUpdateCallback*>(this));
 	showMenu();
 }
 
 void MainWindow::showMenu() {
+	system( "cls" );
 	std::cout << "Welcome!\nChoose an option:\n1. Start game\n2. Show help\n3. Show about\n0. Exit\n=";
 
 	int option;
@@ -15,26 +16,8 @@ void MainWindow::showMenu() {
 	switch (option)
 	{
 	case 1:
-	{
-		
 		startGame();
-
-		// Draw initial board
-		onBoardUpdate();
-
-		controller->startGame();
-
-		// Clean up
-		controller->exitGame();
-		
-		//	while (state == Controller::State::Playing) {
-			
-		//}
-		//if (state == Controller::State::GameOver) {
-
-		//}
 		break;
-	}
 	case 2:
 		showHelp();
 		break;
@@ -47,34 +30,48 @@ void MainWindow::showMenu() {
 	default:
 		break;
 	}
-
-	system("cls");
+	
 	showMenu();
 }
 
 void MainWindow::onBoardUpdate() {
 	boardPanel->draw(controller->getBoard());
-
-	Controller::State state = controller->getState();
-	if (state == Controller::State::GameOver) {
-		
-		//system("cls");
-		std::cout << "Game Over!\n\n1. Restart\n2. Main menu\n";
-		int option;
-		std::cin >> option;
-		if (option == 1) {
-			controller->restartGame();
-		}
-	}
-	if (state == Controller::State::Exit) {
-
-	}
 }
 
 void MainWindow::startGame() {
-	Settings settings = showSettings();
+	system( "cls" );
 
+	Settings settings = showSettings();
 	controller->setupNewGame(settings);
+
+	// draw init board
+	boardPanel->draw( controller->getBoard() );
+
+	// Main game
+	controller->startGame();
+
+	onBoardUpdate();
+
+	// When game is done. Exit the current game
+	controller->exitGame();
+
+
+	// Check end game reason
+	Controller::State state = controller->getState();
+	if ( state == Controller::State::GameOver ) {
+		system( "cls" );
+		std::cout << "Game Over!\n\n1. Restart\n2. Main menu\n";
+		int option;
+		std::cin >> option;
+
+		if ( option == 1 ) {
+			restartGame();
+		} else {
+			// Do nothing
+		}
+	} else if ( state == Controller::State::Exit ) {
+		// also do nothing
+	}
 }
 
 void MainWindow::showHelp(){
@@ -90,7 +87,7 @@ Settings MainWindow::showSettings(){
 }
 
 void MainWindow::restartGame(){
-	controller->restartGame();
+	startGame();
 }
 
 void MainWindow::getMenuClick(){

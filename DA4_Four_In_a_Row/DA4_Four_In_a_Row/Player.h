@@ -22,17 +22,17 @@
 		bool send(int position);
 
 		/*
-		Get's the other players move.
+		notify that the other player moved.
 		@param the x position on the board
 		*/
-		virtual void recieve(int position) = 0;
+		virtual void notify(int position) = 0;
 
 		/*
 		@return get the player's name
 		*/
 		std::string getName() const;
 
-	protected:
+	private:
 		PlayerManager* manager;
 		std::string name;
 	};

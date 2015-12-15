@@ -1,12 +1,13 @@
 #pragma once
 #include "Player.h"
+#include "Board.h"
 
 /*
 Simulates a real player using artificial intelligence.
 */
 class ComputerPlayer : public Player {
 public:
-	ComputerPlayer(PlayerManager* manager, std::string name, int boardWidth, int boardHeight);
+	ComputerPlayer(PlayerManager* manager, std::string name, const Board* board);
 
 	/* Disable copy constructor and assignment operator*/
 	ComputerPlayer(const ComputerPlayer& rhs) = delete;
@@ -15,26 +16,18 @@ public:
 	/* Get the opposite player's move.
 	@param position the x position that is recieved.
 	*/
-	virtual void recieve(int position) override;
-
-	~ComputerPlayer();
+	virtual void notify( int position ) override;
 
 private:
-	int** grid;
-	int boardWidth;
-	int boardHeight;
+
+	/* The board to lookup */
+	const Board* board;
 
 	/*
 	Calculate the best move for the AI
 	@return position of the best move.
 	*/
 	int calculateBestMove();
-
-	/*
-	add the my piece to position x. Y is calculated
-	@param x x position to add
-	*/
-	void ComputerPlayer::addPieceToAIGrid(int x);
 
 	/*
 	Run the AI simulation.

@@ -13,7 +13,7 @@
 		LocalPlayer(const LocalPlayer& rhs) = delete;
 		LocalPlayer& operator=(const LocalPlayer& rhs) = delete;
 
-		virtual void recieve(int position) override;
+		virtual void notify( int position ) override;
 	private:
 		/*
 		Read the computers mouse state.

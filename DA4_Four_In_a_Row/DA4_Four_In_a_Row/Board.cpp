@@ -11,7 +11,7 @@ Board::Board(int width, int height, int rowsToWin) : width(width), height(height
 }
 
 Board::State Board::insert(int playerId, int x){
-	if (x >= width)
+	if (x >= width || x < 0)
 		return State::Invalid;
 
 	int y = 0;

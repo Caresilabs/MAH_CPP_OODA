@@ -2,10 +2,10 @@
 #include "Board.h"
 #include <iostream>
 
-
-
 void BoardPanel::draw(const Board* board) {
 	system("cls");
+	std::cout << "Enter -1 to exit." << "\n";
+
 	for (int i = 0; i < board->getWidth(); i++)
 	{
 		std::cout << i << " ";
