@@ -2,13 +2,13 @@
 #include "PlayerManager.h"
 #include "Board.h"
 
-Controller::Controller( IBoardUpdateCallback* callback ) : boardUpdateCallback( callback ) {
+Controller::Controller( IBoardUpdateCallback* callback, BoardPanel* panel ) : boardUpdateCallback( callback ), panel( panel ) {
 }
 
 void Controller::setupNewGame( Settings settings ) {
 	state = Playing;
 	board = new Board( settings.gridWidth, settings.gridHeight, settings.rowsToWin );
-	playerManager = new PlayerManager( this, settings );
+	playerManager = new PlayerManager( this, panel, settings );
 }
 
 void Controller::startGame() {

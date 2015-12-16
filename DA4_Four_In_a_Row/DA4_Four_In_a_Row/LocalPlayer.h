@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BoardPanel.h"
 #include "Player.h"
 
 	/*
@@ -7,7 +8,7 @@
 	*/
 	class LocalPlayer : public Player {
 	public:
-		LocalPlayer(PlayerManager* manager, std::string name);
+		LocalPlayer(PlayerManager* manager, BoardPanel* panel, std::string name);
 
 		/* Disable copy constructor and assignment operator*/
 		LocalPlayer(const LocalPlayer& rhs) = delete;
@@ -15,6 +16,11 @@
 
 		virtual void notify( int position ) override;
 	private:
+		/*
+		Board panel to get clicks from
+		*/
+		BoardPanel* panel;
+
 		/*
 		Read the computers mouse state.
 		*/

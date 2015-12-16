@@ -1,18 +1,11 @@
 #include "RemotePlayer.h"
-#include <iostream>
 
-RemotePlayer::RemotePlayer(PlayerManager* manager, std::string name) : Player(manager, name) {
+
+RemotePlayer::RemotePlayer(PlayerManager* manager, std::string name) : Player(manager, name), connection(new NetworkConnection(this, true)) {
 }
 
 void RemotePlayer::sendToConnection(int position) {
-	try
-	{
-		throw new NetworkException();
-	}
-	catch (NetworkException* e) {
-		std::cout << e->error;
-		delete e;
-	}
+	connection->sendToConnection( position );
 }
 
 void RemotePlayer::recieveFromConnection(int position){
@@ -24,4 +17,8 @@ void RemotePlayer::notify( int position ) {
 	if (manager->sendInput(this, 1)) {
 		sendToConnection(1);
 	}
+}
+
+RemotePlayer::~RemotePlayer() {
+	delete connection;
 }

@@ -19,5 +19,10 @@ public:
 	*/
 	void draw(const Board* board);
 
+	/*
+	Read the mouse, or in this case keyboard
+	@return mouse data
+	*/
+	int readMouse();
 };
 

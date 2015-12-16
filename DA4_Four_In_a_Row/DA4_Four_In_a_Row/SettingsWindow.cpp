@@ -1,8 +1,6 @@
 #include "SettingsWindow.h"
 #include <iostream>
 
-
-
 Settings SettingsWindow::show() {
 	return generateSettingsFromUI();
 }

@@ -2,7 +2,7 @@
 #include <iostream>
 
 MainWindow::MainWindow() : help(new HelpWindow), about(new AboutWindow), settings(new SettingsWindow) {
-	controller = new Controller(static_cast<IBoardUpdateCallback*>(this));
+	controller = new Controller(static_cast<IBoardUpdateCallback*>(this), boardPanel);
 	showMenu();
 }
 

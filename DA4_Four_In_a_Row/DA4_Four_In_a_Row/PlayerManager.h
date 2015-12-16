@@ -3,51 +3,52 @@
 #include "Settings.h"
 #include "Controller.h"
 
-	class Player;
+class Player;
+class BoardPanel;
+
+/*
+Manages input from the players and whose turn it is.
+*/
+class PlayerManager {
+public:
+	PlayerManager( Controller* controller, BoardPanel* panel, const Settings& settings );
+
+	/* Disable copy constructor and assignment operator*/
+	PlayerManager( const PlayerManager& rhs ) = delete;
+	PlayerManager& operator=( const PlayerManager& rhs ) = delete;
 
 	/*
-	Manages input from the players and whose turn it is.
+	Start the playermanager
 	*/
-	class PlayerManager {
-	public:
-		PlayerManager(Controller* controller, const Settings& settings);
+	void start();
 
-		/* Disable copy constructor and assignment operator*/
-		PlayerManager(const PlayerManager& rhs) = delete;
-		PlayerManager& operator=(const PlayerManager& rhs) = delete;
+	/*
+	Tries to insert a piece using the controller.
+	@param the player.
+	@param the x position on the board
+	@return if the move was valid
+	*/
+	bool sendInput( Player* player, int position );
 
-		/*
-		Start the playermanager
-		*/
-		void start();
+	~PlayerManager();
 
-		/*
-		Tries to insert a piece using the controller.
-		@param the player.
-		@param the x position on the board
-		@return if the move was valid
-		*/
-		bool sendInput(Player* player, int position);
+private:
+	Controller* controller;
 
-		~PlayerManager();
+	Player* playerA;
+	Player* playerB;
 
-	private:
-		Controller* controller;
+	Player* currentTurn;
 
-		Player* playerA;
-		Player* playerB;
+	/*
+	Switch the current player
+	*/
+	void switchPlayer();
 
-		Player* currentTurn;
+	/*
+	@param position the position to notify the other user
+	*/
+	void notifyOther( int position );
 
-		/*
-		Switch the current player
-		*/
-		void switchPlayer();
-
-		/*
-		@param position the position to notify the other user
-		*/
-		void notifyOther(int position);
-
-	};
+};
 

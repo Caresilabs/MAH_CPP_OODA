@@ -6,25 +6,24 @@
 #include <iostream>
 
 
-
-PlayerManager::PlayerManager(Controller* controller, const Settings& settings) : controller(controller) {
+PlayerManager::PlayerManager(Controller* controller, BoardPanel* panel  ,const Settings& settings) : controller(controller) {
 	switch (settings.gameType)
 	{
 	case Settings::GameType::PlayerVSPlayer:
-		playerA = new LocalPlayer(this, settings.playerNameA);
-		playerB = new LocalPlayer(this, settings.playerNameB);
+		playerA = new LocalPlayer( this, panel,settings.playerNameA );
+		playerB = new LocalPlayer( this, panel,settings.playerNameB );
 		break;
 	case Settings::GameType::PlayerVSComputer:
-		playerA = new LocalPlayer(this, settings.playerNameA);
+		playerA = new LocalPlayer( this, panel,settings.playerNameA );
 		playerB = new ComputerPlayer(this, settings.playerNameB, controller->getBoard());
 		break;
 	case Settings::GameType::PlayerVSRemote:
-		playerA = new LocalPlayer(this, settings.playerNameA);
+		playerA = new LocalPlayer( this, panel,settings.playerNameA );
 		playerB = new RemotePlayer(this, settings.playerNameB);
 		break;
 	default:
-		playerA = new LocalPlayer(this, settings.playerNameA);
-		playerB = new LocalPlayer(this, settings.playerNameB);
+		playerA = new LocalPlayer( this, panel,settings.playerNameA );
+		playerB = new LocalPlayer( this, panel, settings.playerNameB );
 		break;
 	}
 

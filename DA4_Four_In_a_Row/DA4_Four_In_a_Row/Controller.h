@@ -5,6 +5,7 @@
 
 class PlayerManager;
 class Board;
+class BoardPanel;
 
 /*
 The Controller class is the key class of the "four in a row" application. It creates the different objects needed to play the game. The Controllers main tasks are to set up a game and to control the game play.
@@ -16,7 +17,7 @@ public:
 		GameOver, Playing, Exit
 	};
 
-	Controller(IBoardUpdateCallback* callback);
+	Controller( IBoardUpdateCallback* callback, BoardPanel* panel );
 
 	/* Disable copy constructor and assignment operator*/
 	Controller(const Controller& rhs) = delete;
@@ -66,6 +67,7 @@ public:
 
 private:
 	Board* board;
+	BoardPanel* panel;
 	PlayerManager* playerManager;
 	IBoardUpdateCallback* boardUpdateCallback;
 

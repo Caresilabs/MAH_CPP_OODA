@@ -21,3 +21,9 @@ void BoardPanel::draw(const Board* board) {
 		std::cout << "\n";
 	}
 }
+
+int BoardPanel::readMouse() {
+	int pos;
+	std::cin >> pos;
+	return pos;
+}
