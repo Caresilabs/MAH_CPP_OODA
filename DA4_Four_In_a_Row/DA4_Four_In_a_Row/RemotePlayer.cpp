@@ -16,12 +16,12 @@ void RemotePlayer::sendToConnection(int position) {
 }
 
 void RemotePlayer::recieveFromConnection(int position){
-	send(position);
+	manager->sendInput(this, position);
 }
 
 void RemotePlayer::notify( int position ) {
 	// mock
-	if (send(1)) {
+	if (manager->sendInput(this, 1)) {
 		sendToConnection(1);
 	}
 }

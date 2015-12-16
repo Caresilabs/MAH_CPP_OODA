@@ -13,7 +13,7 @@ int ComputerPlayer::calculateBestMove() {
 
 void ComputerPlayer::doAI() {
 	int bestMove = calculateBestMove();
-	if (!send(bestMove)) {
+	if (!manager->sendInput(this, bestMove)) {
 		doAI();
 	}
 }

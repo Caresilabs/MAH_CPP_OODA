@@ -2,21 +2,18 @@
 Granskning 3
 Klass diagram
 
-TODO: Det saknas en hel del associationer från t.ex. de olika spelarna. Spelarna måste få sitt drag ifrån något annat objekt. 
+TODO: Det saknas en hel del associationer från t.ex. de olika spelarna. 
+Spelarna måste få sitt drag ifrån något annat objekt. 
 AI måste ha tillgång till Board för att kunna veta hur spel planen ser ut, att dubblera representationen av brädet är mindre lyckat.
 
-Ok: Vänligen addera några namn på associationer och en roll. Jag kan se att detta finns på html dokumentationen.
 
-TODO: Det saknas riktning på associationer vilket måste åtgärdas. Detta lagras i koden vilket saknas. Gissar att ni har flera versioner av er kod.
-
-Ok: Dependency är rätt. Ert undantag används inte av någon annan klass, vilket är ett krav.
-*Vårt exception ligger i RemotePlayer.cpp. Hur jag än vrider och vänder på det så går det inte att skapa en Initiation Länk mellan dem. Bara dependency vilket inte är rätt. Samma sak här med Settings.h
-Kod
+Kan fix: TODO: Det saknas riktning på associationer vilket måste åtgärdas. Detta lagras i koden vilket saknas. Gissar att ni har flera versioner av er kod.
 
 TODO: Koden kompilerar inte.
 
 Sekvensdiagram
-TODO: Kan fortfarande inte se att ProjectReportUni_IHateThis_package.html realiserar något av användningsfallen på ett korrekt sätt. Det saknas information varifrån spelarna får sina drag. Ni ska kunna visa att ni har realiserat alla användnings fall som finns i dokumentet Four in a row game Use Case Model Survey i ett eller flera sekvensdiagram.
+TODO: Kan fortfarande inte se att ProjectReportUni_IHateThis_package.html realiserar något av användningsfallen på ett korrekt sätt. Det saknas information varifrån spelarna får sina drag. 
+Ni ska kunna visa att ni har realiserat alla användnings fall som finns i dokumentet Four in a row game Use Case Model Survey i ett eller flera sekvensdiagram.
 
 *Hoppas det updaterade filerna är till hjälp. Även namngivda nu från 0-11.
 Ni har fått ut exempel på dom flesta sekvensdiagrammen, vänligen studera dessa.
@@ -33,9 +30,20 @@ TODO: 08 Restart game
 Ok: 11 Exit
 
 
-TODO: Det går inte att generera sekvensdiagram eftersom koden inte är klar för att stödja detta.
-TODO: Ert objekt diagram mappar inte mot ert klassdiagram och därmed felaktigt. Rita om i Together se senaste version av uppgiften.
-TODO: Komponent diagram i Together, se senaste version av uppgiften.
-TODO: Rita realisation diagram i Together, se senaste version av uppgiften.
+
 TODO: Vänligen byt namn på ProjectReportUni_IHateThis_package.html
 TODO: Vänligen lämna in enligt den senaste versionen av handledningen till deluppgift nummer fyra.
+
+TODO: Det går inte att generera sekvensdiagram eftersom koden inte är klar för att stödja detta.
+
+
+
+
+Kan fix: TODO: Ert objekt diagram mappar inte mot ert klassdiagram och därmed felaktigt. Rita om i Together se senaste version av uppgiften.
+Kan fix: TODO: Komponent diagram i Together, se senaste version av uppgiften.
+Kan fix: TODO: Rita realisation diagram i Together, se senaste version av uppgiften.
+
+
+Kan fix: Ok: Dependency är rätt. Ert undantag används inte av någon annan klass, vilket är ett krav.
+*Vårt exception ligger i RemotePlayer.cpp. Hur jag än vrider och vänder på det så går det inte att skapa en Initiation Länk mellan dem. Bara dependency vilket inte är rätt. Samma sak här med Settings.h
+Kod

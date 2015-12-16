@@ -15,13 +15,6 @@
 		Player& operator=(const Player& rhs) = delete;
 
 		/*
-		Tries to insert a piece on the board.
-		@param the x position on the board
-		@return if the move was valid
-		*/
-		bool send(int position);
-
-		/*
 		notify that the other player moved.
 		@param the x position on the board
 		*/
@@ -32,7 +25,7 @@
 		*/
 		std::string getName() const;
 
-	private:
+	protected:
 		PlayerManager* manager;
 		std::string name;
 	};

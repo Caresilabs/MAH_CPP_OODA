@@ -7,7 +7,8 @@ LocalPlayer::LocalPlayer(PlayerManager* manager, std::string name) : Player(mana
 void LocalPlayer::readMouse() {
 	int pos;
 	std::cin >> pos;
-	if (!send(pos)) {
+
+	if (!manager->sendInput(this, pos)) {
 		readMouse();
 	}
 }
