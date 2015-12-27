@@ -1,49 +1,20 @@
+Hej!
 
-Granskning 3
-Klass diagram
+Du kollade på vårt projekt och ville ha en liten beskrivning på hur vårt make move system fungerar. Då togethersoft vägrar generera hela vägen.
 
-TODO: Det saknas en hel del associationer från t.ex. de olika spelarna. 
-Spelarna måste få sitt drag ifrån något annat objekt. 
-AI måste ha tillgång till Board för att kunna veta hur spel planen ser ut, att dubblera representationen av brädet är mindre lyckat.
+Vi har gjort det mer "event baserat" spel och vår lösning skulle även fungera med trådar (vi har dock inte använt trådar). 
 
+Allt börjar med att en Player's Notify() function kallas av Controller. Vilket säger till Playern att det är din tur, och även vad den andra spelaren lade.
+Playern gör sitt arbete, antingen readMouse från boardpanel om han e human eller calculateBestMove om han är AI osv. När han är klar (vilket controllern inte bryr sig om), så
+kallar playern på sendInput() i player manager. Player manager kollar om den är valid move genom att fråga controllern som i sin tur frågar brädet.
+Är den valid så gör player manager SwitchPlayer() och även en Notify() på den nya spelaren som då får reda på att det är hans tur.
+Sen börjar det om från början. 
 
-Kan fix: TODO: Det saknas riktning på associationer vilket måste åtgärdas. Detta lagras i koden vilket saknas. Gissar att ni har flera versioner av er kod.
+Playermanager kollar även då om Controllerns state har ändrats från Playing till GameOver för exempel. Då skippar vi en SwitchPLayer och NotifyOther.
+Detta gör att vi bryter vår "loop".
 
-TODO: Koden kompilerar inte.
+Allt annat ska vara fixat. RemotePlayer har nu association till en NetworkConnection, och HumanPlayer har association till BoardPanel för att fråga om input.
+Ett nytt klassdiagram har gjorts. 
 
-Sekvensdiagram
-TODO: Kan fortfarande inte se att ProjectReportUni_IHateThis_package.html realiserar något av användningsfallen på ett korrekt sätt. Det saknas information varifrån spelarna får sina drag. 
-Ni ska kunna visa att ni har realiserat alla användnings fall som finns i dokumentet Four in a row game Use Case Model Survey i ett eller flera sekvensdiagram.
-
-*Hoppas det updaterade filerna är till hjälp. Även namngivda nu från 0-11.
-Ni har fått ut exempel på dom flesta sekvensdiagrammen, vänligen studera dessa.
-Förstår inte PlayerManager, ser framemot att få detta förklarat på ett sekvensdiagram.
-Det saknas sekvensdiagram som realisera följande användningsfall:
-TODO: 01 Start application
-TODO: 02 Start new game (enter settings)
-TODO: 03 Play game
-TODO: 04 HumanPlayer makes a move
-TODO: 05 ComputerPlayer makes a move
-TODO: 06 RemotePlayer makes a move
-TODO: 07 Quit game
-TODO: 08 Restart game
-Ok: 11 Exit
-
-
-
-TODO: Vänligen byt namn på ProjectReportUni_IHateThis_package.html
-TODO: Vänligen lämna in enligt den senaste versionen av handledningen till deluppgift nummer fyra.
-
-TODO: Det går inte att generera sekvensdiagram eftersom koden inte är klar för att stödja detta.
-
-
-
-
-Kan fix: TODO: Ert objekt diagram mappar inte mot ert klassdiagram och därmed felaktigt. Rita om i Together se senaste version av uppgiften.
-Kan fix: TODO: Komponent diagram i Together, se senaste version av uppgiften.
-Kan fix: TODO: Rita realisation diagram i Together, se senaste version av uppgiften.
-
-
-Kan fix: Ok: Dependency är rätt. Ert undantag används inte av någon annan klass, vilket är ett krav.
-*Vårt exception ligger i RemotePlayer.cpp. Hur jag än vrider och vänder på det så går det inte att skapa en Initiation Länk mellan dem. Bara dependency vilket inte är rätt. Samma sak här med Settings.h
-Kod
+Mvh
+Simon och Joakim
