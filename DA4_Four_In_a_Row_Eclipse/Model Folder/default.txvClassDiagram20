@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<nodeSet  version="1.1">
+	<view uin="V1hexuhii8rfopnaevgyi">
+		<property name="$defaultDiagram" value="true"/>
+		<property name="$metaclass" value="ClassDiagram20"/>
+		<reference referencedUin="design:view:::V1hexuhii90swdr65fvu7">
+			<property name="bounds" value="5,5,285,124"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$hidden" value="true"/>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::LocalPlayer">
+			<property name="bounds" value="3595,745,761,302"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+			<reference referencedUin="cpp:association_::LocalPlayer.panel">
+				<property name="sourceAnchor" value="3920,1052"/>
+				<property name="targetAnchor" value="3491,1840"/>
+				<property name="location_set_by_user" value="true"/>
+				<property name="bendpoints" value="3920,1840"/>
+				<property name="smooth_bendpoints" value="3920,1840"/>
+			</reference>
+			<reference referencedUin="cpp:inheritance_::LocalPlayer:Player">
+				<property name="sourceAnchor" value="4137,750"/>
+				<property name="targetAnchor" value="4610,296"/>
+			</reference>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::Player">
+			<property name="bounds" value="4475,-43,609,334"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+			<reference referencedUin="cpp:association_::Player.manager">
+				<property name="sourceAnchor" value="4480,60"/>
+				<property name="targetAnchor" value="3754,60"/>
+				<property name="location_set_by_user" value="true"/>
+			</reference>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::Controller">
+			<property name="bounds" value="2722,585,719,686"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+			<reference referencedUin="cpp:association_::Controller.panel">
+				<property name="sourceAnchor" value="3064,1276"/>
+				<property name="targetAnchor" value="3064,1708"/>
+				<property name="location_set_by_user" value="true"/>
+			</reference>
+			<reference referencedUin="cpp:association_::Controller.boardUpdateCallback">
+				<property name="sourceAnchor" value="2906,590"/>
+				<property name="targetAnchor" value="2357,330"/>
+				<property name="location_set_by_user" value="true"/>
+			</reference>
+			<reference referencedUin="cpp:association_::Controller.playerManager">
+				<property name="sourceAnchor" value="3266,590"/>
+				<property name="targetAnchor" value="3266,504"/>
+			</reference>
+			<reference referencedUin="cpp:association_::Controller.board">
+				<property name="sourceAnchor" value="3446,1240"/>
+				<property name="targetAnchor" value="4220,2040"/>
+				<property name="bendpoints" value="4220,1240"/>
+				<property name="smooth_bendpoints" value="4220,1240"/>
+				<property name="location_set_by_user" value="true"/>
+			</reference>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::MainWindow">
+			<property name="bounds" value="1075,555,631,718"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+			<reference referencedUin="cpp:inheritance_::MainWindow:IBoardUpdateCallback">
+				<property name="sourceAnchor" value="1711,681"/>
+				<property name="targetAnchor" value="2181,330"/>
+			</reference>
+			<reference referencedUin="cpp:association_::MainWindow.settings">
+				<property name="sourceAnchor" value="1240,1278"/>
+				<property name="targetAnchor" value="1240,1740"/>
+			</reference>
+			<reference referencedUin="cpp:element_operation::MainWindow.MainWindow()">
+			</reference>
+			<reference referencedUin="cpp:association_::MainWindow.controller">
+				<property name="sourceAnchor" value="1711,933"/>
+				<property name="targetAnchor" value="2727,933"/>
+			</reference>
+			<reference referencedUin="cpp:association_::MainWindow.about">
+				<property name="sourceAnchor" value="1080,933"/>
+				<property name="targetAnchor" value="661,933"/>
+				<property name="location_set_by_user" value="true"/>
+			</reference>
+			<reference referencedUin="cpp:association_::MainWindow.boardPanel">
+				<property name="sourceAnchor" value="1711,1079"/>
+				<property name="targetAnchor" value="2941,1708"/>
+				<property name="location_set_by_user" value="true"/>
+			</reference>
+			<reference referencedUin="cpp:association_::MainWindow.help">
+				<property name="sourceAnchor" value="1711,1270"/>
+				<property name="targetAnchor" value="2097,1700"/>
+			</reference>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::PlayerManager">
+			<property name="bounds" value="2737,5,1012,494"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+			<reference referencedUin="cpp:association_::PlayerManager.playerB">
+				<property name="sourceAnchor" value="3754,290"/>
+				<property name="targetAnchor" value="4480,290"/>
+				<reference referencedUin="label:$association20RoleClientInplace:cpp:association_::PlayerManager.playerB">
+					<property name="bounds" value="3764,293,89,36"/>
+				</reference>
+			</reference>
+			<reference referencedUin="cpp:association_::PlayerManager.playerA">
+				<property name="sourceAnchor" value="3754,223"/>
+				<property name="targetAnchor" value="4480,223"/>
+				<reference referencedUin="label:$association20RoleClientInplace:cpp:association_::PlayerManager.playerA">
+					<property name="bounds" value="3764,226,90,36"/>
+				</reference>
+			</reference>
+			<reference referencedUin="cpp:association_::PlayerManager.currentTurn">
+				<property name="sourceAnchor" value="3754,140"/>
+				<property name="targetAnchor" value="4480,140"/>
+				<property name="location_set_by_user" value="true"/>
+				<reference referencedUin="label:$association20RoleClientInplace:cpp:association_::PlayerManager.currentTurn">
+					<property name="bounds" value="3764,143,148,36"/>
+				</reference>
+				<reference referencedUin="label:$association20RoleSupplierInplace:cpp:association_::PlayerManager.currentTurn">
+					<property name="bounds" value="4371,143,99,36"/>
+				</reference>
+				<reference referencedUin="label:label:cpp:association_::PlayerManager.currentTurn">
+					<property name="bounds" value="4067,143,101,36"/>
+				</reference>
+			</reference>
+			<reference referencedUin="cpp:association_::PlayerManager.controller">
+				<property name="sourceAnchor" value="3086,504"/>
+				<property name="targetAnchor" value="3086,590"/>
+			</reference>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::ComputerPlayer">
+			<property name="bounds" value="4335,1395,991,334"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+			<reference referencedUin="cpp:association_::ComputerPlayer.board">
+				<property name="sourceAnchor" value="4480,1734"/>
+				<property name="targetAnchor" value="4480,2040"/>
+			</reference>
+			<reference referencedUin="cpp:inheritance_::ComputerPlayer:Player">
+				<property name="sourceAnchor" value="4745,1400"/>
+				<property name="targetAnchor" value="4745,296"/>
+			</reference>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::Board">
+			<property name="bounds" value="4015,2035,614,654"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::BoardPanel">
+			<property name="bounds" value="2855,1703,631,238"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::NetworkConnection">
+			<property name="bounds" value="5575,1395,841,366"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+			<property name="collapsedCompartments" value="Operation20"/>
+			<reference referencedUin="cpp:association_::NetworkConnection.player">
+				<property name="sourceAnchor" value="5911,1400"/>
+				<property name="targetAnchor" value="5911,1116"/>
+				<property name="location_set_by_user" value="true"/>
+			</reference>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::RemotePlayer">
+			<property name="bounds" value="5273,745,741,366"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+			<reference referencedUin="cpp:inheritance_::RemotePlayer:Player">
+				<property name="sourceAnchor" value="5451,750"/>
+				<property name="targetAnchor" value="4963,296"/>
+				<property name="location_set_by_user" value="true"/>
+			</reference>
+			<reference referencedUin="cpp:association_::RemotePlayer.connection">
+				<property name="sourceAnchor" value="5919,1116"/>
+				<property name="targetAnchor" value="5919,1400"/>
+				<property name="location_set_by_user" value="true"/>
+			</reference>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::Settings">
+			<property name="bounds" value="6115,395,413,561"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::AboutWindow">
+			<property name="bounds" value="5,745,651,366"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::IBoardUpdateCallback">
+			<property name="bounds" value="2075,215,348,110"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::SettingsWindow">
+			<property name="bounds" value="955,1735,441,174"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::HelpWindow">
+			<property name="bounds" value="1895,1695,666,302"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+		</reference>
+		<reference referencedUin="cpp:element_clazz::NetworkException">
+			<property name="bounds" value="5283,5,721,238"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="bounds_setted_by_user" value="true"/>
+		</reference>
+		<reference referencedUin="design:view:::Vam8ynkii90uohresl0cn">
+			<property name="bounds" value="6239,5,353,139"/>
+			<property name="location_set_by_user" value="true"/>
+		</reference>
+	</view>
+</nodeSet>
